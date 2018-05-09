@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Binominal.fs" />
+    <Compile Include="Binomial.fs" />
   </ItemGroup>
 
 </Project>
