@@ -1,4 +1,4 @@
-module FSharp.Statistics.Binomial
+module FsStats.Binomial
 
 /// Binomial Coefficient n choose k
 let coefficient n k = 

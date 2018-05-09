@@ -1,9 +1,9 @@
-module FSharp.Statistics.Binomial.Tests
+module FsStats.Binomial.Tests
 
 open Xunit
 open FsUnit.Xunit
 
-open FSharp.Statistics.Binomial
+open FsStats.Binomial
 
 [<Fact>]
 let ``10 choose 3 equals 120`` () =
