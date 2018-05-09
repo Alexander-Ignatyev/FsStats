@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{07846D12-9981-492D-A44C-AE819EA09B81}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Library", "src\Library\Library.fsproj", "{FD211ABD-4277-408D-8577-CABA5869F7D1}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsStats", "src\FsStats\FsStats.fsproj", "{FD211ABD-4277-408D-8577-CABA5869F7D1}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Test", "src\Test\Test.fsproj", "{BEF1E9F2-E0E6-422B-A52D-05F986A5FC2B}"
 EndProject
