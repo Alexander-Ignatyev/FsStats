@@ -3,8 +3,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../Library/Library.fsproj">
-      <Name>Library.fsproj</Name>
+    <ProjectReference Include="../FsStats/FsStats.fsproj">
+      <Name>FsStats.fsproj</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
