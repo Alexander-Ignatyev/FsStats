@@ -31,5 +31,5 @@ type Distribution(n: int, p: float) =
 
     member self.Probability k = pmf k n p
 
-    member self.Sample = bernoulli.Samples n |> Array.sum
+    member self.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)
     member self.Samples m = Array.init m (fun _ -> self.Sample)
