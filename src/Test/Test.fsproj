@@ -8,8 +8,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bernoulli.fs" />
-    <Compile Include="Binomial.fs" />
+    <Compile Include="BernoulliTests.fs" />
+    <Compile Include="BinomialTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
