@@ -8,6 +8,6 @@ type Distribution(p: float) =
     member self.Variance = variance
     member self.StdDev = sqrt variance
 
-    member self.Sample = if rnd.NextDouble() < p then 1 else 0
+    member self.Sample = rnd.NextDouble() < p
 
     member self.Samples k = Array.init k (fun _ -> self.Sample)
