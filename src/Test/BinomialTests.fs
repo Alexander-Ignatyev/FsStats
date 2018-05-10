@@ -45,3 +45,8 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
     bd.Sample |> should be (lessThan 8)
     bd.Samples 20 |> should haveLength 20
 
+[<Fact>]
+let ``Probabily of winning in at least 4 out of 10 ten Roulette games`` () = 
+    let bd = new Distribution(10, 18.0/38.0)
+    Array.sumBy bd.Probability [|4..10|]
+    |> should (equalWithin 1e-7) 0.7815551
