@@ -8,6 +8,7 @@
     <Compile Include="Bernoulli.fs" />
     <Compile Include="Binomial.fs" />
     <Compile Include="Poisson.fs" />
+    <Compile Include="Special.fs" />
   </ItemGroup>
 
 </Project>
