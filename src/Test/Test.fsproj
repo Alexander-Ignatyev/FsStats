@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="BernoulliTests.fs" />
     <Compile Include="BinomialTests.fs" />
+    <Compile Include="PoissonTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
