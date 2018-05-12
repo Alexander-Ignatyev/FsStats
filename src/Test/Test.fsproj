@@ -12,6 +12,7 @@
     <Compile Include="BinomialTests.fs" />
     <Compile Include="PoissonTests.fs" />
     <Compile Include="SpecialTests.fs" />
+    <Compile Include="NormalTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
