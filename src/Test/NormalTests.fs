@@ -26,6 +26,7 @@ let ``Normal distribution confidence intervals`` (mu, sigma) =
     let nd = new Distribution(mu, sigma)
     let interval x = (nd.Probability (mu + x)) - (nd.Probability (mu - x))
     interval sigma |> should (equalWithin 1e-4) 0.6827
+    interval (1.96*sigma) |> should (equalWithin 1e-4) 0.95
     interval (2.0*sigma) |> should (equalWithin 1e-4) 0.9545
     interval (3.0*sigma) |> should (equalWithin 1e-4) 0.9973
 
