@@ -2,6 +2,8 @@ module FsStats.Special
 
 
 /// Gauss error function
+/// maximum approximation error: 1.5×10−7
+/// https://en.wikipedia.org/wiki/Error_function#Approximation_with_elementary_functions
 let erf x = 
     let sign = if x < 0.0 then -1.0 else 1.0
     let x = abs x
