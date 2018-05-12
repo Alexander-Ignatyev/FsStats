@@ -9,6 +9,7 @@
     <Compile Include="Binomial.fs" />
     <Compile Include="Poisson.fs" />
     <Compile Include="Special.fs" />
+    <Compile Include="Normal.fs" />
   </ItemGroup>
 
 </Project>
