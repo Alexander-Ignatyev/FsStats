@@ -10,6 +10,7 @@
     <Compile Include="Poisson.fs" />
     <Compile Include="Special.fs" />
     <Compile Include="Normal.fs" />
+    <Compile Include="Summary.fs" />
   </ItemGroup>
 
 </Project>
