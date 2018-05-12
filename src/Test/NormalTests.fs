@@ -16,6 +16,8 @@ let ``Normal distribution`` () =
     nd.Probability 100.0 |> should (equalWithin 1e-5) 1.0
     nd.Probability (mu - sigma) |> should (equalWithin 1e-4) (0.5 - 0.6827*0.5)
     nd.Probability (mu + sigma) |> should (equalWithin 1e-4) (0.5 + 0.6827*0.5)
+    nd.Sample |> should be ofExactType<float>
+    nd.Samples 20 |> should haveLength 20
 
 [<Theory>]
 [<InlineData(0.0, 1.0)>]
@@ -26,3 +28,9 @@ let ``Normal distribution confidence intervals`` (mu, sigma) =
     interval sigma |> should (equalWithin 1e-4) 0.6827
     interval (2.0*sigma) |> should (equalWithin 1e-4) 0.9545
     interval (3.0*sigma) |> should (equalWithin 1e-4) 0.9973
+
+[<Fact>]
+let ``Mean of generated random values should be close to the distribution's mean`` () =
+    let mu, sigma = 11.0, 3.0
+    let nd = new Distribution(mu, sigma)
+    nd.Samples 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu
