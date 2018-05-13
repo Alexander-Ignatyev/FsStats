@@ -15,6 +15,7 @@ let ``Summary Statistics`` () =
                  10.7603987140471; 10.4357884213866; 10.3055137320688; 12.2362093650794; 8.77565517588214; 
                  6.43386624817808; 12.0007153989415; 12.8771963800697; 9.24429657175203; 10.3720301023293|]
     let stats = new SummaryStatistics(data)
+    stats.SampleLength |> should equal 29
     stats.Mean |> should (equalWithin 1e-5)  9.98706
     stats.Variance |> should (equalWithin 1e-5) 4.08428
     stats.StdDev |> should (equalWithin 1e-5) 2.02096
@@ -26,3 +27,10 @@ let ``Summary Statistics`` () =
 [<InlineData(10.0, 3.0, 1.0, -3.0)>]
 let ``z-score tests`` (mu, sigma, x, expectedZScore) = 
     zScore mu sigma x |> should (equalWithin 1e-5) expectedZScore
+
+
+[<Fact>]
+let ``Temperature and ice cream sales should have strong positive correlation`` () =
+    let temperature = [|14.2; 16.4; 11.9; 15.2; 18.5; 22.1; 19.4; 25.1; 23.4; 18.1; 22.6; 17.2|]
+    let iceCreamSales = [|215.0; 325.0; 185.0; 332.0; 406.0; 522.0; 412.0; 614.0; 544.0; 421.0; 445.0; 408.0|]
+    correlation temperature iceCreamSales |> should (equalWithin 1e-5) 0.95751
