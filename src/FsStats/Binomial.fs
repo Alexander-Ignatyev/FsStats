@@ -1,5 +1,7 @@
 module FsStats.Binomial
 
+open FsStats.IntegerDistribution
+
 /// Binomial Coefficient n choose k
 let coefficient n k = 
     let k = max k (n-k)
@@ -21,15 +23,17 @@ let pmf k n p =
 /// n - number of trials
 /// p - probability of success
 type Distribution(n: int, p: float) =
+    inherit IntegerDistribution()
     let mean = p * float n
     let variance = p * (1.0 - p) * float n
     let bernoulli = new Bernoulli.Distribution(p)
 
-    member self.Mean = mean
-    member self.Variance = variance
-    member self.StdDev = sqrt variance
+    override self.Mean = mean
+    override self.Variance = variance
+    override self.StdDev = sqrt variance
 
-    member self.Probability k = pmf k n p
+    override self.Probability k = pmf k n p
 
-    member self.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)
-    member self.Samples m = Array.init m (fun _ -> self.Sample)
+    override self.CumulativeProbability k = Array.sumBy self.Probability [|0 .. k|]
+
+    override self.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)

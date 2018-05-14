@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="IntegerDistribution.fs" />
     <Compile Include="Bernoulli.fs" />
     <Compile Include="Binomial.fs" />
     <Compile Include="Poisson.fs" />
