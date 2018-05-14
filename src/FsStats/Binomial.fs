@@ -28,12 +28,12 @@ type Distribution(n: int, p: float) =
     let variance = p * (1.0 - p) * float n
     let bernoulli = new Bernoulli.Distribution(p)
 
-    override self.Mean = mean
-    override self.Variance = variance
-    override self.StdDev = sqrt variance
+    override this.Mean = mean
+    override this.Variance = variance
+    override this.StdDev = sqrt variance
 
-    override self.Probability k = pmf k n p
+    override this.Probability k = pmf k n p
 
-    override self.CumulativeProbability k = Array.sumBy self.Probability [|0 .. k|]
+    override this.CumulativeProbability k = Array.sumBy this.Probability [|0 .. k|]
 
-    override self.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)
+    override this.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)
