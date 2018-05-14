@@ -32,6 +32,10 @@ let ``Binomial Distribution of 10 tosses of fair coin`` () =
     bd.Variance |> should (equalWithin 1e-10) 2.5
     bd.StdDev |> should (equalWithin 1e-10) 1.58113883008
     bd.Probability 3 |> should (equalWithin 1e-10) 0.1171875
+    bd.CumulativeProbability (0, 10) |> should (equalWithin 1e-10) 1.0
+    bd.CumulativeProbability (0, 5) |> should (equalWithin 1e-10) 0.623046875
+    bd.CumulativeProbability 10 |> should (equalWithin 1e-10) 1.0
+    bd.CumulativeProbability 5 |> should (equalWithin 1e-10) 0.623046875
     bd.Sample |> should be (lessThan 11)
     bd.Samples 20 |> should haveLength 20
 
@@ -42,6 +46,10 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
     bd.Variance |> should (equalWithin 1e-10) 1.47
     bd.StdDev |> should (equalWithin 1e-10) 1.2124355653
     bd.Probability 3 |> should (equalWithin 1e-10) 0.2268945
+    bd.CumulativeProbability (0, 7) |> should (equalWithin 1e-10) 1.0
+    bd.CumulativeProbability (0, 3) |> should (equalWithin 1e-10) 0.873964
+    bd.CumulativeProbability 7 |> should (equalWithin 1e-10) 1.0
+    bd.CumulativeProbability 3 |> should (equalWithin 1e-10) 0.873964
     bd.Sample |> should be (lessThan 8)
     bd.Samples 20 |> should haveLength 20
 
