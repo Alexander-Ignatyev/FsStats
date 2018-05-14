@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Distribution.fs" />
     <Compile Include="IntegerDistribution.fs" />
+    <Compile Include="Hypothesis.fs" />
     <Compile Include="Bernoulli.fs" />
     <Compile Include="Binomial.fs" />
     <Compile Include="Poisson.fs" />

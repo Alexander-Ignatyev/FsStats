@@ -14,6 +14,7 @@
     <Compile Include="SpecialTests.fs" />
     <Compile Include="NormalTests.fs" />
     <Compile Include="SummaryTests.fs" />
+    <Compile Include="HypothesisTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
