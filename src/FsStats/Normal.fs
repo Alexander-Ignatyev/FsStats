@@ -1,8 +1,6 @@
 namespace FsStats
 
 open FsStats.Special
-open FsStats.RealDistribution
-
 
 module Normal =
     let rec private nextPair (rnd: System.Random) =
@@ -28,7 +26,7 @@ module Normal =
 
 
 type NormalDistribution(mu: float, sigma: float) =
-    inherit RealDistribution()
+    inherit ContinuousDistribution()
     let rnd = new System.Random()
     override self.Mean = mu
     override self.Variance = sigma * sigma
