@@ -11,7 +11,7 @@ type PoissonDistribution(mu: float) =
             |0 | 1 -> acc
             | _    -> util(value - 1, acc * value)
         util(x,1)
-        
+
     let rnd = new System.Random()
     let knuthsSample mu (rnd : System.Random) =
         let l = exp (-mu)
@@ -26,5 +26,8 @@ type PoissonDistribution(mu: float) =
     member self.Variance = mu
     member self.StdDev = sqrt mu
     member self.Probability k = (mu ** float k) * exp (-mu) / (float (factorial k))
+    member self.CumulativeProbability k = 
+        let s = Array.sumBy (fun i -> (mu ** float i) / (float (factorial i))) [|0 .. k|]
+        exp (-mu) * s
     member self.Sample = knuthsSample mu rnd
     member self.Samples k = Array.init k (fun _ -> self.Sample)
