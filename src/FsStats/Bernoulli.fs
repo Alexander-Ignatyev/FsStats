@@ -2,7 +2,7 @@ namespace FsStats
 
 /// Bernoulli distribution
 type BernoulliDistribution(p: float) =
-    inherit IntegerDistribution()
+    inherit DiscreteDistribution()
     let variance = p * (1.0 - p)
     let rnd = new System.Random()
     override self.Mean = p

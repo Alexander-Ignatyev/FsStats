@@ -1,7 +1,8 @@
-module FsStats.RealDistribution
+namespace FsStats
 
+/// Continuous Probability Distribution base class
 [<AbstractClass>]
-type RealDistribution() =
+type ContinuousDistribution() =
     inherit Distribution<float>()
     // There is no well-defined Probability Mass Function (PMF) for Real distrinution
     // so Cumulative Distribution Function is the same as PMF.

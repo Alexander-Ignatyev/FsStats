@@ -22,7 +22,7 @@ module Binomial =
 /// n - number of trials
 /// p - probability of success
 type BinomialDistribution(n: int, p: float) =
-    inherit IntegerDistribution()
+    inherit DiscreteDistribution()
     let mean = p * float n
     let variance = p * (1.0 - p) * float n
     let bernoulli = new BernoulliDistribution(p)
