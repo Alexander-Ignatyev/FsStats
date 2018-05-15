@@ -3,12 +3,12 @@ module ``Normal Distribution tests``
 open Xunit
 open FsUnit.Xunit
 
-open FsStats.Normal
+open FsStats
 
 [<Fact>]
 let ``Normal distribution`` () =
     let mu, sigma = 10.0, 2.0
-    let nd = new Distribution(mu, sigma)
+    let nd = new NormalDistribution(mu, sigma)
     nd.Mean |> should (equalWithin 1e-5) mu
     nd.Variance |> should (equalWithin 1e-5) (sigma*sigma)
     nd.StdDev |> should (equalWithin 1e-5) sigma
@@ -23,7 +23,7 @@ let ``Normal distribution`` () =
 [<InlineData(0.0, 1.0)>]
 [<InlineData(10.0, 2.0)>]
 let ``Normal distribution confidence intervals`` (mu, sigma) =
-    let nd = new Distribution(mu, sigma)
+    let nd = new NormalDistribution(mu, sigma)
     let interval x = (nd.Probability (mu + x)) - (nd.Probability (mu - x))
     interval sigma |> should (equalWithin 1e-4) 0.6827
     interval (1.96*sigma) |> should (equalWithin 1e-4) 0.95
@@ -33,5 +33,5 @@ let ``Normal distribution confidence intervals`` (mu, sigma) =
 [<Fact>]
 let ``Mean of generated random values should be close to the distribution's mean`` () =
     let mu, sigma = 11.0, 3.0
-    let nd = new Distribution(mu, sigma)
+    let nd = new NormalDistribution(mu, sigma)
     nd.Samples 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu

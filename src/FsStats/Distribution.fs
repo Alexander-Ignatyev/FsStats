@@ -1,4 +1,4 @@
-module FsStats.Distribution
+namespace FsStats
 
 /// Abstract Distribution class
 [<AbstractClass>]

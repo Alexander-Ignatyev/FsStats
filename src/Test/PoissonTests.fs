@@ -3,11 +3,11 @@ module ``Poisson Distribution tests``
 open Xunit
 open FsUnit.Xunit
 
-open FsStats.Poisson
+open FsStats
 
 [<Fact>]
 let ``Poisson Distribution`` () = 
-    let bd = new Distribution(7.1)
+    let bd = new PoissonDistribution(7.1)
     bd.Mean |> should (equalWithin 1e-10) 7.1
     bd.Variance |> should (equalWithin 1e-10) 7.1
     bd.StdDev |> should (equalWithin 1e-10) 2.66458251889
@@ -20,7 +20,7 @@ let ``Poisson Distribution`` () =
 [<Fact>]
 let ``Average of randomly generated values should go to mean value`` () = 
     let mu = 7.1
-    let bd = new Distribution(mu)
+    let bd = new PoissonDistribution(mu)
     bd.Samples 100
     |> Array.averageBy (fun e -> float e)
     |> should (equalWithin 1.0) mu
