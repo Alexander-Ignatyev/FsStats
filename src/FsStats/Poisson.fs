@@ -5,6 +5,7 @@ namespace FsStats
 /// of independent events 
 /// occurring within a fixed interval
 type PoissonDistribution(mu: float) = 
+    inherit DiscreteDistribution()
     let factorial x = 
         let rec util(value, acc) = 
             match value with
@@ -22,12 +23,11 @@ type PoissonDistribution(mu: float) =
             else k
         util(0, 1.0)
 
-    member self.Mean = mu
-    member self.Variance = mu
-    member self.StdDev = sqrt mu
-    member self.Probability k = (mu ** float k) * exp (-mu) / (float (factorial k))
-    member self.CumulativeProbability k = 
+    override self.Mean = mu
+    override self.Variance = mu
+    override self.StdDev = sqrt mu
+    override self.Probability k = (mu ** float k) * exp (-mu) / (float (factorial k))
+    override self.CumulativeProbability k = 
         let s = Array.sumBy (fun i -> (mu ** float i) / (float (factorial i))) [|0 .. k|]
         exp (-mu) * s
-    member self.Sample = knuthsSample mu rnd
-    member self.Samples k = Array.init k (fun _ -> self.Sample)
+    override self.Sample = knuthsSample mu rnd
