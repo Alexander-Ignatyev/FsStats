@@ -13,6 +13,8 @@ let ``Poisson Distribution`` () =
     bd.StdDev |> should (equalWithin 1e-10) 2.66458251889
     bd.Probability 10 |> should (equalWithin 1e-5) 0.07402
     bd.Probability 7 |> should (equalWithin 1e-5) 0.14890
+    bd.CumulativeProbability 10 |> should (equalWithin 1e-5) 0.89423
+    bd.CumulativeProbability 7 |> should (equalWithin 1e-5) 0.58382
     bd.Sample |> should be ofExactType<int>
     bd.Samples 20 |> should haveLength 20
 
