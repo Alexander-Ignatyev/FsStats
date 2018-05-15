@@ -1,7 +1,7 @@
 module FsStats.Normal
-open FsStats
 
-open Special
+open FsStats.Special
+open FsStats.RealDistribution
 
 let rec private nextPair (rnd: System.Random) =
     let u = rnd.NextDouble() * 2.0 - 1.0
@@ -26,16 +26,15 @@ let private fromStandard mu sigma x = (x * sigma) + mu
 
 
 type Distribution(mu: float, sigma: float) =
+    inherit RealDistribution()
     let rnd = new System.Random()
-    member self.Mean = mu
-    member self.Variance = sigma * sigma
-    member self.StdDev = sigma
+    override self.Mean = mu
+    override self.Variance = sigma * sigma
+    override self.StdDev = sigma
 
     /// Cumulative distribution function
-    member self.Probability x = (1.0 + erf((x - mu) / (sigma * sqrt 2.0))) * 0.5
+    override self.Probability x = (1.0 + erf((x - mu) / (sigma * sqrt 2.0))) * 0.5
 
-    member self.Sample = 
+    override self.Sample = 
         let x, _ = polarMethod rnd
         fromStandard mu sigma x
-
-    member self.Samples k = Array.init k (fun _ -> self.Sample)
