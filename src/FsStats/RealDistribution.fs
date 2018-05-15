@@ -1,8 +1,5 @@
 module FsStats.RealDistribution
 
-open FsStats.Distribution
-
-
 [<AbstractClass>]
 type RealDistribution() =
     inherit Distribution<float>()

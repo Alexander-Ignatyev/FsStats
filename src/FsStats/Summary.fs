@@ -1,11 +1,4 @@
-module FsStats.Summary
-
-let DivideByInt = LanguagePrimitives.DivideByInt
-
-/// z-score is the number of standard deviations from the mean a data point is.
-/// It takes mean mu, standard deviation sigma and the data point x. 
-let zScore mu sigma x = (x - mu) / sigma
-
+namespace FsStats
 
 /// Sample Summary Statistics
 type SummaryStatistics(data: float []) =
@@ -13,7 +6,7 @@ type SummaryStatistics(data: float []) =
     let mean = Array.average data
     let variance = 
         let s = Array.sumBy (fun x -> (x - mean) ** 2.0) data
-        DivideByInt s sampleLength
+        LanguagePrimitives.DivideByInt s sampleLength
 
     member self.SampleLength = sampleLength
     /// Sample mean
@@ -25,17 +18,15 @@ type SummaryStatistics(data: float []) =
     /// Sample standard deviation
     member self.StdDev = sqrt variance
 
-    /// Sample z-score
-    member self.zScore = zScore mean (sqrt variance)
+module Summary =
 
-
-/// Sample Correlation
-let correlation dataX dataY =
-    let summaryX = new SummaryStatistics(dataX)
-    let summaryY = new SummaryStatistics(dataY)
-    let muX = summaryX.Mean
-    let muY = summaryY.Mean
-    let cov = Array.zip dataX dataY
-              |> Array.sumBy (fun (x, y) -> (x - muX) * (y - muY))
-              |> fun s -> DivideByInt s summaryX.SampleLength
-    cov / (summaryX.StdDev * summaryY.StdDev)
+    /// Sample Correlation
+    let correlation dataX dataY =
+        let summaryX = new SummaryStatistics(dataX)
+        let summaryY = new SummaryStatistics(dataY)
+        let muX = summaryX.Mean
+        let muY = summaryY.Mean
+        let cov = Array.zip dataX dataY
+                  |> Array.sumBy (fun (x, y) -> (x - muX) * (y - muY))
+                  |> fun s -> LanguagePrimitives.DivideByInt s summaryX.SampleLength
+        cov / (summaryX.StdDev * summaryY.StdDev)

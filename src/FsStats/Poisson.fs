@@ -1,17 +1,17 @@
-module FsStats.Poisson
-
-let factorial x = 
-    let rec util(value, acc) = 
-        match value with
-        |0 | 1 -> acc
-        | _    -> util(value - 1, acc * value)
-    util(x,1)
+namespace FsStats
 
 /// Poisson distribution
 /// where mu is observed mean rate 
 /// of independent events 
 /// occurring within a fixed interval
-type Distribution(mu: float) = 
+type PoissonDistribution(mu: float) = 
+    let factorial x = 
+        let rec util(value, acc) = 
+            match value with
+            |0 | 1 -> acc
+            | _    -> util(value - 1, acc * value)
+        util(x,1)
+        
     let rnd = new System.Random()
     let knuthsSample mu (rnd : System.Random) =
         let l = exp (-mu)

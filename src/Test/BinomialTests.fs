@@ -3,6 +3,7 @@ module ``Binomial Distribution Tests``
 open Xunit
 open FsUnit.Xunit
 
+open FsStats
 open FsStats.Binomial
 
 [<Fact>]
@@ -27,7 +28,7 @@ let ``PMF (3 10 0.7) equals  0.009001692`` () =
 
 [<Fact>]
 let ``Binomial Distribution of 10 tosses of fair coin`` () = 
-    let bd = new Distribution(10, 0.5)
+    let bd = new BinomialDistribution(10, 0.5)
     bd.Mean |> should (equalWithin 1e-10) 5
     bd.Variance |> should (equalWithin 1e-10) 2.5
     bd.StdDev |> should (equalWithin 1e-10) 1.58113883008
@@ -41,7 +42,7 @@ let ``Binomial Distribution of 10 tosses of fair coin`` () =
 
 [<Fact>]
 let ``Binomial Distribution of 7 tosses of loaded coin`` () = 
-    let bd = new Distribution(7, 0.3)
+    let bd = new BinomialDistribution(7, 0.3)
     bd.Mean |> should (equalWithin 1e-10) 2.1
     bd.Variance |> should (equalWithin 1e-10) 1.47
     bd.StdDev |> should (equalWithin 1e-10) 1.2124355653
@@ -55,6 +56,6 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
 
 [<Fact>]
 let ``Probabily of winning in at least 4 out of 10 ten Roulette games`` () = 
-    let bd = new Distribution(10, 18.0/38.0)
+    let bd = new BinomialDistribution(10, 18.0/38.0)
     Array.sumBy bd.Probability [|4..10|]
     |> should (equalWithin 1e-7) 0.7815551

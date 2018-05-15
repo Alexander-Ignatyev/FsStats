@@ -3,6 +3,7 @@ module ``Summary Statistics tests``
 open Xunit
 open FsUnit.Xunit
 
+open FsStats
 open FsStats.Summary
 
 [<Fact>]
@@ -19,14 +20,6 @@ let ``Summary Statistics`` () =
     stats.Mean |> should (equalWithin 1e-5)  9.98706
     stats.Variance |> should (equalWithin 1e-5) 4.08428
     stats.StdDev |> should (equalWithin 1e-5) 2.02096
-    stats.zScore 16.0 |> should (equalWithin 1e-5) 2.97528
-
-
-[<Theory>]
-[<InlineData(0.0, 1.0, 2.0, 2.0)>]
-[<InlineData(10.0, 3.0, 1.0, -3.0)>]
-let ``z-score tests`` (mu, sigma, x, expectedZScore) = 
-    zScore mu sigma x |> should (equalWithin 1e-5) expectedZScore
 
 
 [<Fact>]

@@ -1,6 +1,4 @@
-module FsStats.IntegerDistribution
-
-open FsStats.Distribution
+namespace FsStats
 
 [<AbstractClass>]
 type IntegerDistribution() =

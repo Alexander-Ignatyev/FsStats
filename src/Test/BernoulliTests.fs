@@ -3,11 +3,11 @@ module ``Bernoiulli distribution tests``
 open Xunit
 open FsUnit.Xunit
 
-open FsStats.Bernoulli
+open FsStats
 
 [<Fact>]
 let ``Bernoulli distribution of fair coin tosses`` () =
-    let d = new Distribution(0.5)
+    let d = new BernoulliDistribution(0.5)
     d.Mean |> should (equalWithin 1e-10) 0.5
     d.Variance |> should (equalWithin 1e-10) 0.25
     d.StdDev |> should (equalWithin 1e-10) 0.5
@@ -16,7 +16,7 @@ let ``Bernoulli distribution of fair coin tosses`` () =
 
 [<Fact>]
 let ``Bernoulli distribution of loaded coin tosses`` () =
-    let d = new Distribution(0.7)
+    let d = new BernoulliDistribution(0.7)
     d.Mean |> should (equalWithin 1e-10) 0.7
     d.Variance |> should (equalWithin 1e-10) 0.21
     d.StdDev |> should (equalWithin 1e-10) 0.45825756949
