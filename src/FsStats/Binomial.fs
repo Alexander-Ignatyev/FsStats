@@ -35,4 +35,4 @@ type BinomialDistribution(n: int, p: float) =
 
     override this.CumulativeProbability k = Array.sumBy this.Probability [|0 .. k|]
 
-    override this.Sample = bernoulli.Samples n |> Array.sumBy (fun b -> if b then 1 else 0)
+    override this.Sample = bernoulli.Samples n |> Array.sum

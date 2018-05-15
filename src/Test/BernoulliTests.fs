@@ -11,8 +11,11 @@ let ``Bernoulli distribution of fair coin tosses`` () =
     d.Mean |> should (equalWithin 1e-10) 0.5
     d.Variance |> should (equalWithin 1e-10) 0.25
     d.StdDev |> should (equalWithin 1e-10) 0.5
-    d.Sample |> should be ofExactType<bool>
+    d.Sample |> should be ofExactType<int>
     d.Samples 20 |> should haveLength 20
+    d.Probability 0 |> should (equalWithin 1e-10) (1.0 - 0.5)
+    d.Probability 1 |> should (equalWithin 1e-10) 0.5
+    d.Probability 2 |> should (equalWithin 1e-10) 0.0
 
 [<Fact>]
 let ``Bernoulli distribution of loaded coin tosses`` () =
@@ -20,5 +23,8 @@ let ``Bernoulli distribution of loaded coin tosses`` () =
     d.Mean |> should (equalWithin 1e-10) 0.7
     d.Variance |> should (equalWithin 1e-10) 0.21
     d.StdDev |> should (equalWithin 1e-10) 0.45825756949
-    d.Sample |> should be ofExactType<bool>
+    d.Sample |> should be ofExactType<int>
     d.Samples 20 |> should haveLength 20
+    d.Probability 0 |> should (equalWithin 1e-10) (1.0 - 0.7)
+    d.Probability 1 |> should (equalWithin 1e-10) 0.7
+    d.Probability 2 |> should (equalWithin 1e-10) 0.0

@@ -2,12 +2,19 @@ namespace FsStats
 
 /// Bernoulli distribution
 type BernoulliDistribution(p: float) =
+    inherit IntegerDistribution()
     let variance = p * (1.0 - p)
     let rnd = new System.Random()
-    member self.Mean = p
-    member self.Variance = variance
-    member self.StdDev = sqrt variance
+    override self.Mean = p
+    override self.Variance = variance
+    override self.StdDev = sqrt variance
 
-    member self.Sample = rnd.NextDouble() < p
+    override self.Probability k = 
+        match k with 
+        | 0 -> 1.0 - p
+        | 1 -> p
+        | _ -> 0.0
 
-    member self.Samples k = Array.init k (fun _ -> self.Sample)
+    override this.CumulativeProbability k = Array.sumBy this.Probability [|0 .. k|]
+
+    override self.Sample = if rnd.NextDouble() < p then 1 else 0
