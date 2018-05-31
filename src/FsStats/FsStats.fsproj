@@ -8,13 +8,13 @@
     <Compile Include="Distribution.fs" />
     <Compile Include="DiscreteDistribution.fs" />
     <Compile Include="ContinuousDistribution.fs" />
-    <Compile Include="Hypothesis.fs" />
     <Compile Include="Bernoulli.fs" />
     <Compile Include="Binomial.fs" />
     <Compile Include="Poisson.fs" />
     <Compile Include="Special.fs" />
     <Compile Include="Normal.fs" />
     <Compile Include="Summary.fs" />
+    <Compile Include="Hypothesis.fs" />
   </ItemGroup>
 
 </Project>
