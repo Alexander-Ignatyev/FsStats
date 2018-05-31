@@ -13,6 +13,7 @@
     <Compile Include="Poisson.fs" />
     <Compile Include="Special.fs" />
     <Compile Include="Normal.fs" />
+    <Compile Include="Student.fs" />
     <Compile Include="Summary.fs" />
     <Compile Include="Hypothesis.fs" />
   </ItemGroup>
