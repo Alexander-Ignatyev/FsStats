@@ -39,3 +39,49 @@ module Special =
             Math.Sqrt (2.0 * Math.PI) * t ** (z - 0.5) * Math.Exp (-t) * (x + coefficient0)
 
 
+    /// Logarithm of the absolute value of the Gamma function.
+    let gammaln x = x |> gammaLanczos |> abs |> Math.Log
+
+    module BetaHelper = 
+        let contfractbeta a b x itermax eps =
+            let qab = a + b
+            let qap = a + 1.0
+            let qam = a - 1.0
+            let bz = 1.0 - qab * x / qap
+            let rec helper am bm az bz iter =
+                let em = iter + 1 |> float
+                let tem = em + em
+                let d = em * (b - em) * x / ((qam + tem) * (a + tem))
+                let ap = az + d * am
+                let bp = bz + d * bm
+                let dp = -(a + em) * (qab + em) * x / ((qap + tem) * (a + tem))
+                let app = ap + dp * az
+                let bpp = bp + dp * bz
+                let am' = ap / bpp
+                let bm' = bp / bpp
+                let az' = app / bpp
+                let bz' = 1.0
+                if abs (az' - az) < (eps * abs(az)) || iter = itermax
+                then az'
+                else helper am' bm' az' bz' (iter + 1)
+            helper 1.0 1.0 1.0 bz 0
+
+
+    /// Beta function
+    let beta a b = 
+        gammaLanczos a * gammaLanczos b / gammaLanczos (a + b)
+
+
+    /// Regularized Incomlete Beta function
+    // https://malishoaib.wordpress.com/2014/04/15/the-beautiful-beta-functions-in-raw-python/
+    // Numerical Recipes in C.
+    let betainc a b = function
+        | 0.0 -> 0.0
+        | 1.0 -> 1.0
+        | x ->
+            let contfractbeta a b x = BetaHelper.contfractbeta a b x 1000 1e-7
+            let lbeta = gammaln (a + b) - gammaln a - gammaln b + a * Math.Log x + b * Math.Log (1.0 - x)
+            if x < (a + 1.0) / (a + b + 2.0)
+            then Math.Exp lbeta * contfractbeta a b x / a
+            else 1.0 - Math.Exp lbeta * contfractbeta b a (1.0 - x) / b
+
