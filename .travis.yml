@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 2.1.200
+dotnet: 2.1.300
 script:
  - dotnet restore
  - dotnet test src/Test/Test.fsproj 
