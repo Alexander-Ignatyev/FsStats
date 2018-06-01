@@ -50,9 +50,22 @@ let ``Z-Test Should Work`` (trueMean, trueStd, sampleMean, sampleSize, lowerP) =
 [<InlineData(35.0, 10.0, "35.0, 45.0, 58.0, 44.0, 48.0", 0.95)>]
 [<InlineData(-35.0, 10.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.05)>]
 [<InlineData(-55.0, 10.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.95)>]
-let ``Z-Test for Array Should Work`` (trueMean, trueStd, sampleString: string, lowerP) =
+let ``Z-Test for Sample Should Work`` (trueMean, trueStd, sampleString: string, lowerP) =
     let sample = sampleString.Split(',') |> Array.map float
     let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
-    zTestForArray trueMean trueStd sample LowerTailed |> lowerTail
-    zTestForArray trueMean trueStd sample UpperTailed |> upperTail
-    zTestForArray trueMean trueStd sample TwoTailed |> twoTail
+    zTestForSample trueMean trueStd sample LowerTailed |> lowerTail
+    zTestForSample trueMean trueStd sample UpperTailed |> upperTail
+    zTestForSample trueMean trueStd sample TwoTailed |> twoTail
+
+
+[<Theory>]
+[<InlineData(55.0, "35.0, 45.0, 58.0, 44.0, 48.0", 0.05)>]
+[<InlineData(35.0, "35.0, 45.0, 58.0, 44.0, 48.0", 0.95)>]
+[<InlineData(-35.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.05)>]
+[<InlineData(-55.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.95)>]
+let ``T-Test for Sample Should Work`` (trueMean, sampleString: string, lowerP) =
+    let sample = sampleString.Split(',') |> Array.map float
+    let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
+    tTestForSample trueMean sample LowerTailed |> lowerTail
+    tTestForSample trueMean sample UpperTailed |> upperTail
+    tTestForSample trueMean sample TwoTailed |> twoTail
