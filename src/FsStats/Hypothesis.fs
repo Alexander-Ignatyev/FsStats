@@ -21,20 +21,35 @@ module Hypothesis =
         | TwoTailed
 
 
+    let private performTest cdf testType score =
+        let p = cdf -(abs score)
+        let pValue = match testType with
+                     | LowerTailed -> if score < 0.0 then p else 1.0 - p
+                     | UpperTailed -> if score < 0.0 then 1.0 - p else p
+                     | TwoTailed -> 2.0 * p
+        pValue
+
+
     /// Perform Z-Test for the given true mean, true standard deviation, sample mean and and size of the sample.  
     let zTest trueMean trueStd sampleMean sampleSize testType =
         let standard = new NormalDistribution(0.0, 1.0)
         let standardError = trueStd / sqrt (float sampleSize)
         let z = (sampleMean - trueMean) / standardError
-        let p = standard.CumulativeProbability -(abs z)
-        let pValue = match testType with
-                     | LowerTailed -> if z < 0.0 then p else 1.0 - p
-                     | UpperTailed -> if z < 0.0 then 1.0 - p else p
-                     | TwoTailed -> 2.0 * p
-        pValue
+        performTest standard.CumulativeProbability testType z
 
-
+        
     /// Perform Z-Test for the given true mean, true standard deviation and array of sample data.
-    let zTestForArray trueMean trueStd sample testType =
+    let zTestForSample trueMean trueStd sample testType =
         let summary = SummaryStatistics(sample)
         zTest trueMean trueStd summary.Mean (Array.length sample) testType
+
+
+    /// Perform Student's T-Test for the given true mean and array of sample data.
+    let tTestForSample trueMean sample testType = 
+        let summary = new SummaryStatistics(sample)
+        let sampleSize = Array.length sample
+        let standardError = summary.StdDev / sqrt (sampleSize |> float)
+        let tScore = (summary.Mean - trueMean) / standardError
+        performTest (Student.cdf (sampleSize - 1)) testType tScore
+
+
