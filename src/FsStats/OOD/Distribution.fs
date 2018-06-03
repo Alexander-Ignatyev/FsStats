@@ -1,4 +1,4 @@
-namespace FsStats
+namespace FsStats.OOD
 
 /// Abstract Distribution class
 [<AbstractClass>]

@@ -1,4 +1,4 @@
-namespace FsStats
+namespace FsStats.OOD
 
 /// Poisson distribution
 /// where mu is observed mean rate 

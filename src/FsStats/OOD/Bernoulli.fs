@@ -1,4 +1,4 @@
-namespace FsStats
+namespace FsStats.OOD
 
 /// Bernoulli distribution
 type BernoulliDistribution(p: float) =

@@ -8,11 +8,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BernoulliTests.fs" />
-    <Compile Include="BinomialTests.fs" />
-    <Compile Include="PoissonTests.fs" />
+    <Compile Include="OOD/BernoulliTests.fs" />
+    <Compile Include="OOD/BinomialTests.fs" />
+    <Compile Include="OOD/PoissonTests.fs" />
+    <Compile Include="OOD/NormalTests.fs" />
+    <Compile Include="NormalDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
-    <Compile Include="NormalTests.fs" />
     <Compile Include="StudentTests.fs" />
     <Compile Include="SummaryTests.fs" />
     <Compile Include="HypothesisTests.fs" />

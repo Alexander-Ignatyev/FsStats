@@ -3,7 +3,7 @@ module ``Normal Distribution tests``
 open Xunit
 open FsUnit.Xunit
 
-open FsStats
+open FsStats.OOD
 
 [<Fact>]
 let ``Normal distribution`` () =

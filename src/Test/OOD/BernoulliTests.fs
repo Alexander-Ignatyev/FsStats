@@ -3,7 +3,7 @@ module ``Bernoiulli distribution tests``
 open Xunit
 open FsUnit.Xunit
 
-open FsStats
+open FsStats.OOD
 
 [<Fact>]
 let ``Bernoulli distribution of fair coin tosses`` () =

@@ -1,4 +1,4 @@
-namespace FsStats
+namespace FsStats.OOD
 
 /// Discrete Probability Distribution base class
 [<AbstractClass>]

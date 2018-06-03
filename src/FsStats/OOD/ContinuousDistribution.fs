@@ -1,4 +1,4 @@
-namespace FsStats
+namespace FsStats.OOD
 
 /// Continuous Probability Distribution base class
 [<AbstractClass>]
