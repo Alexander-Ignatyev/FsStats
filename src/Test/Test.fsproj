@@ -12,6 +12,7 @@
     <Compile Include="OOD/BinomialTests.fs" />
     <Compile Include="OOD/PoissonTests.fs" />
     <Compile Include="OOD/NormalTests.fs" />
+    <Compile Include="BernoulliDistributionTests.fs" />
     <Compile Include="NormalDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
     <Compile Include="StudentTests.fs" />

@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Special.fs" />
     <Compile Include="NormalDistribution.fs" />
+    <Compile Include="BernoulliDistribution.fs" />
     <Compile Include="Student.fs" />
     <Compile Include="Summary.fs" />
     <Compile Include="Hypothesis.fs" />
