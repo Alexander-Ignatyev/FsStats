@@ -1,4 +1,4 @@
-module ``Poisson Distribution tests``
+module ``OOD Poisson Distribution tests``
 
 open Xunit
 open FsUnit.Xunit
