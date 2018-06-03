@@ -11,6 +11,9 @@ let ``Normal distribution`` () =
     let mu, sigma = 10.0, 2.0
     let nd = NormalDistribution.create mu sigma
     let cdf = NormalDistribution.cdf nd
+    NormalDistribution.mean nd |> should (equalWithin 1e-5) mu
+    NormalDistribution.variance nd |> should (equalWithin 1e-5) (sigma*sigma)
+    NormalDistribution.stddev nd |> should (equalWithin 1e-5) sigma
     cdf mu |> should (equalWithin 1e-5) 0.5
     cdf 100.0 |> should (equalWithin 1e-5) 1.0
     cdf (mu - sigma) |> should (equalWithin 1e-4) (0.5 - 0.6827*0.5)
@@ -21,6 +24,7 @@ let ``Normal distribution`` () =
 [<Theory>]
 [<InlineData(0.0, 1.0)>]
 [<InlineData(10.0, 2.0)>]
+[<InlineData(-5.0, 3.0)>]
 let ``Normal distribution confidence intervals`` (mu, sigma) =
     let nd = NormalDistribution.create mu sigma
     let cdf = NormalDistribution.cdf nd

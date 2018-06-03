@@ -1,4 +1,4 @@
-module ``Normal Distribution tests``
+module ``OOD Normal Distribution tests``
 
 open Xunit
 open FsUnit.Xunit

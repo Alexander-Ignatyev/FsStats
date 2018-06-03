@@ -7,11 +7,11 @@ type NormalDistribution(mu: float, sigma: float) =
     inherit ContinuousDistribution()
     let d = create mu sigma
     let rnd = new System.Random()
-    override self.Mean = mu
-    override self.Variance = sigma * sigma
-    override self.StdDev = sigma
+    override __.Mean = mean d
+    override __.Variance = variance d
+    override __.StdDev = stddev d
 
     /// Cumulative distribution function
-    override self.Probability x = cdf d x
+    override __.Probability x = cdf d x
 
-    override self.Sample = sample d rnd
+    override __.Sample = sample d rnd

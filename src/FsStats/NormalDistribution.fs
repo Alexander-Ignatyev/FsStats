@@ -30,6 +30,12 @@ module NormalDistribution =
     let create mu sigma =
         { Mu = mu; Sigma = sigma }
 
+    let mean { T.Mu = mu } = mu
+
+    let variance { Sigma = sigma } = sigma * sigma
+
+    let stddev { Sigma = sigma } = sigma
+
     let cdf { Mu = mu; Sigma = sigma } x =
         (1.0 + erf((x - mu) / (sigma * sqrt 2.0))) * 0.5
 
