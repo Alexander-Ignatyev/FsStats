@@ -2,7 +2,7 @@ namespace FsStats
 
 
 /// Student's t-distribution
-module Student =
+module StudentsDistribution =
 
     /// Cumulative distribution function
     /// takes degrees of freedom and t score

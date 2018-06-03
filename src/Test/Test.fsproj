@@ -16,8 +16,8 @@
     <Compile Include="BinomialDistributionTests.fs" />
     <Compile Include="NormalDistributionTests.fs" />
     <Compile Include="PoissonDistributionTests.fs" />
+    <Compile Include="StudentsDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
-    <Compile Include="StudentTests.fs" />
     <Compile Include="SummaryTests.fs" />
     <Compile Include="HypothesisTests.fs" />
     <Compile Include="Program.fs" />

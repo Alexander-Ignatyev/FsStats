@@ -10,7 +10,7 @@
     <Compile Include="BernoulliDistribution.fs" />
     <Compile Include="BinomialDistribution.fs" />
     <Compile Include="PoissonDistribution.fs" />
-    <Compile Include="Student.fs" />
+    <Compile Include="StudentsDistribution.fs" />
     <Compile Include="Summary.fs" />
     <Compile Include="Hypothesis.fs" />
 

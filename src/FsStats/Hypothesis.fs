@@ -41,6 +41,6 @@ module Hypothesis =
         let sampleSize = Array.length sample
         let standardError = summary.StdDev / sqrt (sampleSize |> float)
         let tScore = (summary.Mean - trueMean) / standardError
-        performTest (Student.cdf (sampleSize - 1)) testType tScore
+        performTest (StudentsDistribution.cdf (sampleSize - 1)) testType tScore
 
 

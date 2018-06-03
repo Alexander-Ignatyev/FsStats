@@ -13,4 +13,4 @@ open FsStats
 [<InlineData(17, -0.1, 0.4608)>]
 [<InlineData(21, -0.7, 0.2458)>]
 let ``cumulative distribution function`` (df, t, expected) =
-    Student.cdf df t |> should (equalWithin 1e-4) expected
+    StudentsDistribution.cdf df t |> should (equalWithin 1e-4) expected
