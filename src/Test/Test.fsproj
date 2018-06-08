@@ -18,7 +18,7 @@
     <Compile Include="PoissonDistributionTests.fs" />
     <Compile Include="StudentsDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
-    <Compile Include="SummaryTests.fs" />
+    <Compile Include="SummaryStatisticsTests.fs" />
     <Compile Include="HypothesisTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

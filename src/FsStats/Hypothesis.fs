@@ -31,13 +31,13 @@ module Hypothesis =
         
     /// Perform Z-Test for the given true mean, true standard deviation and array of sample data.
     let zTestForSample trueMean trueStd sample testType =
-        let summary = SummaryStatistics(sample)
+        let summary = SummaryStatistics.create sample
         zTest trueMean trueStd summary.Mean (Array.length sample) testType
 
 
     /// Perform Student's T-Test for the given true mean and array of sample data.
     let tTestForSample trueMean sample testType = 
-        let summary = new SummaryStatistics(sample)
+        let summary = SummaryStatistics.create sample
         let sampleSize = Array.length sample
         let standardError = summary.StdDev / sqrt (sampleSize |> float)
         let tScore = (summary.Mean - trueMean) / standardError

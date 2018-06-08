@@ -11,7 +11,7 @@
     <Compile Include="BinomialDistribution.fs" />
     <Compile Include="PoissonDistribution.fs" />
     <Compile Include="StudentsDistribution.fs" />
-    <Compile Include="Summary.fs" />
+    <Compile Include="SummaryStatistics.fs" />
     <Compile Include="Hypothesis.fs" />
 
     <Compile Include="OOD/Distribution.fs" />
