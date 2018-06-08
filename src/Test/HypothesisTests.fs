@@ -4,7 +4,9 @@ open Xunit
 open FsUnit.Xunit
 
 
+open FsStats
 open FsStats.Hypothesis
+
 
 
 [<Theory>]
@@ -26,11 +28,11 @@ let getZTestExpectedResults lowerP =
 [<InlineData(35.0, 10.0, 47, 20, 0.95)>]
 [<InlineData(-35.0, 10.0, -47, 20, 0.05)>]
 [<InlineData(-55.0, 10.0, -47, 20, 0.95)>]
-let ``Z-Test Should Work`` (trueMean, trueStd, sampleMean, sampleSize, lowerP) =
+let ``One-sample Z-Test Should Work`` (trueMean, trueStd, sampleMean, sampleSize, lowerP) =
     let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
-    zTest trueMean trueStd sampleMean sampleSize LowerTailed |> lowerTail
-    zTest trueMean trueStd sampleMean sampleSize UpperTailed |> upperTail
-    zTest trueMean trueStd sampleMean sampleSize TwoTailed |> twoTail
+    OneSample.zTest trueMean trueStd sampleMean sampleSize LowerTailed |> lowerTail
+    OneSample.zTest trueMean trueStd sampleMean sampleSize UpperTailed |> upperTail
+    OneSample.zTest trueMean trueStd sampleMean sampleSize TwoTailed |> twoTail
 
 
 [<Theory>]
@@ -38,12 +40,15 @@ let ``Z-Test Should Work`` (trueMean, trueStd, sampleMean, sampleSize, lowerP) =
 [<InlineData(35.0, 10.0, "35.0, 45.0, 58.0, 44.0, 48.0", 0.95)>]
 [<InlineData(-35.0, 10.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.05)>]
 [<InlineData(-55.0, 10.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.95)>]
-let ``Z-Test for Sample Should Work`` (trueMean, trueStd, sampleString: string, lowerP) =
+let ``One-sample Z-Test for Sample Should Work`` (trueMean, trueStd, sampleString: string, lowerP) =
     let sample = sampleString.Split(',') |> Array.map float
     let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
-    zTestForSample trueMean trueStd sample LowerTailed |> lowerTail
-    zTestForSample trueMean trueStd sample UpperTailed |> upperTail
-    zTestForSample trueMean trueStd sample TwoTailed |> twoTail
+    let summary = SummaryStatistics.create sample
+    let sampleMean = SummaryStatistics.mean summary
+    let sampleSize = Array.length sample
+    OneSample.zTest trueMean trueStd sampleMean sampleSize LowerTailed |> lowerTail
+    OneSample.zTest trueMean trueStd sampleMean sampleSize UpperTailed |> upperTail
+    OneSample.zTest trueMean trueStd sampleMean sampleSize TwoTailed |> twoTail
 
 
 [<Theory>]
@@ -51,9 +56,13 @@ let ``Z-Test for Sample Should Work`` (trueMean, trueStd, sampleString: string, 
 [<InlineData(35.0, "35.0, 45.0, 58.0, 44.0, 48.0", 0.95)>]
 [<InlineData(-35.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.05)>]
 [<InlineData(-55.0, "-35.0, -45.0, -58.0, -44.0, -48.0", 0.95)>]
-let ``T-Test for Sample Should Work`` (trueMean, sampleString: string, lowerP) =
+let ``One-sample T-Test for Sample Should Work`` (trueMean, sampleString: string, lowerP) =
     let sample = sampleString.Split(',') |> Array.map float
     let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
-    tTestForSample trueMean sample LowerTailed |> lowerTail
-    tTestForSample trueMean sample UpperTailed |> upperTail
-    tTestForSample trueMean sample TwoTailed |> twoTail
+    let summary = SummaryStatistics.create sample
+    let sampleMean = SummaryStatistics.mean summary
+    let sampleStd = SummaryStatistics.stdDev summary
+    let sampleSize = Array.length sample
+    OneSample.tTest trueMean sampleMean sampleStd sampleSize LowerTailed |> lowerTail
+    OneSample.tTest trueMean sampleMean sampleStd sampleSize UpperTailed |> upperTail
+    OneSample.tTest trueMean sampleMean sampleStd sampleSize TwoTailed |> twoTail
