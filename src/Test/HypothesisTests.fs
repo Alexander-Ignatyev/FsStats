@@ -3,17 +3,8 @@ module ``Statistical Hypothesis Tests``
 open Xunit
 open FsUnit.Xunit
 
-
 open FsStats
 open FsStats.Hypothesis
-
-
-
-[<Theory>]
-[<InlineData(0.0, 1.0, 2.0, 2.0)>]
-[<InlineData(10.0, 3.0, 1.0, -3.0)>]
-let ``z-score tests`` (mu, sigma, x, expectedZScore) = 
-    zScore mu sigma x |> should (equalWithin 1e-5) expectedZScore
 
 
 let getZTestExpectedResults lowerP =

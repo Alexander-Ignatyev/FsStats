@@ -45,3 +45,7 @@ module NormalDistribution =
 
     let samples d rnd m = Array.init m (fun _ -> sample d rnd)
 
+    /// z-score is the number of standard deviations from the mean a data point is.
+    /// It takes mean mu, standard deviation sigma and the data point x. 
+    let zScore { Mu = mu; Sigma = sigma } x = (x - mu) / sigma
+

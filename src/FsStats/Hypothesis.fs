@@ -1,11 +1,6 @@
 namespace FsStats
 
-module Hypothesis = 
-    /// z-score is the number of standard deviations from the mean a data point is.
-    /// It takes mean mu, standard deviation sigma and the data point x. 
-    let zScore mu sigma x = (x - mu) / sigma
-
-
+module Hypothesis =
     type TestType =
         | LowerTailed
         | UpperTailed

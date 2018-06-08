@@ -40,3 +40,10 @@ let ``Mean of generated random values should be close to the distribution's mean
     let mu, sigma = 11.0, 3.0
     let nd = NormalDistribution.create mu sigma
     NormalDistribution.samples nd rnd 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu
+
+[<Theory>]
+[<InlineData(0.0, 1.0, 2.0, 2.0)>]
+[<InlineData(10.0, 3.0, 1.0, -3.0)>]
+let ``z-score tests`` (mu, sigma, x, expectedZScore) =
+    let nd = NormalDistribution.create mu sigma
+    NormalDistribution.zScore nd x |> should (equalWithin 1e-5) expectedZScore
