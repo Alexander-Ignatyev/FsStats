@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>FsStats</PackageId>
+    <Version>0.1.2</Version>
+    <Authors>Alexander Ignatyev</Authors>
+    <Description>Basic Statistics Library and Some Probability</Description>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Alexander-Ignatyev/FsStats/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Ignatyev/FsStats</RepositoryUrl>
+    <PackageTags>statistics; mathematics; fsharp; functional-programming</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
