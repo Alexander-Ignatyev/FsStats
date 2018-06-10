@@ -15,5 +15,5 @@ type PoissonDistribution(mu: float) =
     override __.Variance = variance pd
     override __.StdDev = stddev pd
     override __.Probability k = pmf pd k
-    override self.CumulativeProbability k = cdf pd k
-    override self.Sample = sample pd rnd
+    override __.CumulativeProbability k = cdf pd k
+    override __.Random = random pd rnd

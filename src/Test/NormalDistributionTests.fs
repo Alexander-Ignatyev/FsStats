@@ -18,8 +18,8 @@ let ``Normal distribution`` () =
     cdf 100.0 |> should (equalWithin 1e-5) 1.0
     cdf (mu - sigma) |> should (equalWithin 1e-4) (0.5 - 0.6827*0.5)
     cdf (mu + sigma) |> should (equalWithin 1e-4) (0.5 + 0.6827*0.5)
-    NormalDistribution.sample nd rnd |> should be ofExactType<float>
-    NormalDistribution.samples nd rnd 20 |> should haveLength 20
+    NormalDistribution.random nd rnd |> should be ofExactType<float>
+    NormalDistribution.sample nd rnd 20 |> should haveLength 20
 
 [<Theory>]
 [<InlineData(0.0, 1.0)>]
@@ -39,7 +39,7 @@ let ``Mean of generated random values should be close to the distribution's mean
     let rnd = new System.Random()
     let mu, sigma = 11.0, 3.0
     let nd = NormalDistribution.create mu sigma
-    NormalDistribution.samples nd rnd 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu
+    NormalDistribution.sample nd rnd 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu
 
 [<Theory>]
 [<InlineData(0.0, 1.0, 2.0, 2.0)>]

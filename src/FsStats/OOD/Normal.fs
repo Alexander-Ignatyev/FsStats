@@ -14,4 +14,4 @@ type NormalDistribution(mu: float, sigma: float) =
     /// Cumulative distribution function
     override __.Probability x = cdf d x
 
-    override __.Sample = sample d rnd
+    override __.Random = random d rnd

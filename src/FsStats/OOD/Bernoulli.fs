@@ -15,4 +15,4 @@ type BernoulliDistribution(p: float) =
 
     override __.CumulativeProbability k = cdf d k
 
-    override __.Sample = sample d rnd
+    override __.Random = random d rnd

@@ -15,14 +15,14 @@ let ``Poisson Distribution`` () =
     bd.Probability 7 |> should (equalWithin 1e-5) 0.14890
     bd.CumulativeProbability 10 |> should (equalWithin 1e-5) 0.89423
     bd.CumulativeProbability 7 |> should (equalWithin 1e-5) 0.58382
-    bd.Sample |> should be ofExactType<int>
-    bd.Samples 20 |> should haveLength 20
+    bd.Random |> should be ofExactType<int>
+    bd.Sample 20 |> should haveLength 20
 
 
 [<Fact>]
 let ``Average of randomly generated values should go to mean value`` () = 
     let mu = 7.1
     let bd = new PoissonDistribution(mu)
-    bd.Samples 100
+    bd.Sample 100
     |> Array.averageBy (fun e -> float e)
     |> should (equalWithin 1.0) mu

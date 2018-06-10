@@ -35,8 +35,10 @@ module BinomialDistribution =
     /// Cumulative Distribution Function.
     let cdf d k = Array.sumBy (pmf d) [|0 .. k|]
 
-    let sample { NuberOfTrials = n; P = p } (rnd : System.Random) = 
+    /// Generates a random number from Binomial distribution
+    let random { NuberOfTrials = n; P = p } (rnd : System.Random) = 
         let bd = BernoulliDistribution.create p
-        BernoulliDistribution.samples bd rnd n |> Array.sum
+        BernoulliDistribution.sample bd rnd n |> Array.sum
 
-    let samples d rnd m = Array.init m (fun _ -> sample d rnd)
+    /// Generates a random sample of size m from Binomial distribution
+    let sample d rnd m = Array.init m (fun _ -> random d rnd)

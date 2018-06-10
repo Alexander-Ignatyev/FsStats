@@ -16,8 +16,8 @@ let ``Poisson Distribution`` () =
     PoissonDistribution.pmf pd 7 |> should (equalWithin 1e-5) 0.14890
     PoissonDistribution.cdf pd 10 |> should (equalWithin 1e-5) 0.89423
     PoissonDistribution.cdf pd 7 |> should (equalWithin 1e-5) 0.58382
-    PoissonDistribution.sample pd rnd |> should be ofExactType<int>
-    PoissonDistribution.samples pd rnd 20 |> should haveLength 20
+    PoissonDistribution.random pd rnd |> should be ofExactType<int>
+    PoissonDistribution.sample pd rnd 20 |> should haveLength 20
 
 
 [<Fact>]
@@ -25,6 +25,6 @@ let ``Average of randomly generated values should go to mean value`` () =
     let rnd = new System.Random()
     let mu = 7.1
     let pd = PoissonDistribution.create mu
-    PoissonDistribution.samples pd rnd 100
+    PoissonDistribution.sample pd rnd 100
     |> Array.averageBy float
     |> should (equalWithin 1.0) mu

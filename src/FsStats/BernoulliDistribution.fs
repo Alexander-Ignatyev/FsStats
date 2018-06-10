@@ -26,6 +26,8 @@ module BernoulliDistribution =
         elif k < 1 then (1.0 - p)
         else 1.0
 
-    let sample { P = p } (rnd : System.Random) = if rnd.NextDouble() < p then 1 else 0
+    /// Generates a random number from Bernoulli distribution
+    let random { P = p } (rnd : System.Random) = if rnd.NextDouble() < p then 1 else 0
 
-    let samples d rnd m = Array.init m (fun _ -> sample d rnd)
+    /// Generates a random sample of size n from Bernoulli distribution
+    let sample bd rnd n = Array.init n (fun _ -> random bd rnd)

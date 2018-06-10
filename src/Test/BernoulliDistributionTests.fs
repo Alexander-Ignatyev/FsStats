@@ -13,11 +13,24 @@ let ``Bernoulli distribution of fair coin tosses`` (p, var) =
     let rnd = new System.Random()
     let d = BernoulliDistribution.create p
     BernoulliDistribution.mean d |> should (equalWithin 1e-10) p
+    
+    /// **Description**
+    ///
+    /// **Parameters**
+    ///   * `f` - parameter of type `'a ->  ^b`
+    ///   * `x` - parameter of type `'a`
+    ///   * `y` - parameter of type `obj`
+    ///
+    /// **Output Type**
+    ///   * `unit`
+    ///
+    /// **Exceptions**
+    ///
     BernoulliDistribution.variance d |> should (equalWithin 1e-10) var
     BernoulliDistribution.stddev d |> should (equalWithin 1e-10) (sqrt var)
 
-    BernoulliDistribution.sample d rnd |> should be ofExactType<int>
-    BernoulliDistribution.samples d rnd 20 |> should haveLength 20
+    BernoulliDistribution.random d rnd |> should be ofExactType<int>
+    BernoulliDistribution.sample d rnd 20 |> should haveLength 20
 
     BernoulliDistribution.pmf d 0 |> should (equalWithin 1e-10) (1.0 - p)
     BernoulliDistribution.pmf d 1 |> should (equalWithin 1e-10) p

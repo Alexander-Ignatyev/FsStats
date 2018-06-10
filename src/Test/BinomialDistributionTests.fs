@@ -37,8 +37,8 @@ let ``Binomial Distribution of 10 tosses of fair coin`` () =
     BinomialDistribution.pmf bd 3 |> should (equalWithin 1e-10) 0.1171875
     BinomialDistribution.cdf bd 10 |> should (equalWithin 1e-10) 1.0
     BinomialDistribution.cdf bd 5 |> should (equalWithin 1e-10) 0.623046875
-    BinomialDistribution.sample bd rnd |> should be (lessThan 11)
-    BinomialDistribution.samples bd rnd 20 |> should haveLength 20
+    BinomialDistribution.random bd rnd |> should be (lessThan 11)
+    BinomialDistribution.sample bd rnd 20 |> should haveLength 20
 
 [<Fact>]
 let ``Binomial Distribution of 7 tosses of loaded coin`` () =
@@ -50,8 +50,8 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
     BinomialDistribution.pmf bd 3 |> should (equalWithin 1e-10) 0.2268945
     BinomialDistribution.cdf bd 7 |> should (equalWithin 1e-10) 1.0
     BinomialDistribution.cdf bd 3 |> should (equalWithin 1e-10) 0.873964
-    BinomialDistribution.sample bd rnd |> should be (lessThan 8)
-    BinomialDistribution.samples bd rnd 20 |> should haveLength 20
+    BinomialDistribution.random bd rnd |> should be (lessThan 8)
+    BinomialDistribution.sample bd rnd 20 |> should haveLength 20
 
 [<Fact>]
 let ``Probabily of winning in at least 4 out of 10 ten Roulette games`` () =

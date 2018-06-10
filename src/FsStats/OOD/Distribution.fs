@@ -15,5 +15,7 @@ type Distribution<'T>() =
     abstract member CumulativeProbability : 'T -> float
     /// Cumulative Distribution Function (CDF): P(x1 <= X <= x2)
     abstract member CumulativeProbability : 'T*'T -> float
-    abstract member Sample : 'T with get
-    member this.Samples m = Array.init m (fun _ -> this.Sample)
+    /// Generates a random number from the distribution
+    abstract member Random : 'T with get
+    /// Generates a random sample of size n from the distribution
+    member this.Sample n = Array.init n (fun _ -> this.Random)

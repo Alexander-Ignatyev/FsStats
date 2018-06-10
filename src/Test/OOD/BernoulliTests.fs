@@ -14,8 +14,8 @@ let ``Bernoulli distribution of fair coin tosses`` (p, var) =
     d.Mean |> should (equalWithin 1e-10) p
     d.Variance |> should (equalWithin 1e-10) var
     d.StdDev |> should (equalWithin 1e-10) (sqrt var)
-    d.Sample |> should be ofExactType<int>
-    d.Samples 20 |> should haveLength 20
+    d.Random |> should be ofExactType<int>
+    d.Sample 20 |> should haveLength 20
     d.Probability 0 |> should (equalWithin 1e-10) (1.0 - p)
     d.Probability 1 |> should (equalWithin 1e-10) p
     d.Probability 2 |> should (equalWithin 1e-10) 0.0

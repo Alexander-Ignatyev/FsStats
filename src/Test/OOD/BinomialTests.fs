@@ -16,8 +16,8 @@ let ``Binomial Distribution of 10 tosses of fair coin`` () =
     bd.CumulativeProbability (0, 5) |> should (equalWithin 1e-10) 0.623046875
     bd.CumulativeProbability 10 |> should (equalWithin 1e-10) 1.0
     bd.CumulativeProbability 5 |> should (equalWithin 1e-10) 0.623046875
-    bd.Sample |> should be (lessThan 11)
-    bd.Samples 20 |> should haveLength 20
+    bd.Random |> should be (lessThan 11)
+    bd.Sample 20 |> should haveLength 20
 
 [<Fact>]
 let ``Binomial Distribution of 7 tosses of loaded coin`` () = 
@@ -30,8 +30,8 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
     bd.CumulativeProbability (0, 3) |> should (equalWithin 1e-10) 0.873964
     bd.CumulativeProbability 7 |> should (equalWithin 1e-10) 1.0
     bd.CumulativeProbability 3 |> should (equalWithin 1e-10) 0.873964
-    bd.Sample |> should be (lessThan 8)
-    bd.Samples 20 |> should haveLength 20
+    bd.Random |> should be (lessThan 8)
+    bd.Sample 20 |> should haveLength 20
 
 [<Fact>]
 let ``Probabily of winning in at least 4 out of 10 ten Roulette games`` () = 

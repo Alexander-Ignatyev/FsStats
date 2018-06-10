@@ -40,6 +40,8 @@ module PoissonDistribution =
         let s = Array.sumBy (fun i -> (mu ** float i) / (float (factorial i))) [|0 .. k|]
         exp (-mu) * s
 
-    let sample { T.Mu = mu } (rnd : System.Random) = knuthsSample mu rnd
+    /// Generates a random number from Poisson distribution
+    let random { T.Mu = mu } (rnd : System.Random) = knuthsSample mu rnd
 
-    let samples d rnd m = Array.init m (fun _ -> sample d rnd)
+    /// Generates a random sample of size m from Poisson distribution
+    let sample d rnd m = Array.init m (fun _ -> random d rnd)
