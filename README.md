@@ -1,6 +1,6 @@
 # FsStats
 
-[![Build Status](https://travis-ci.org/Alexander-Ignatyev/FsStats.svg?branch=master)](https://travis-ci.org/Alexander-Ignatyev/FsStats)
+[![Build Status](https://travis-ci.org/aligusnet/FsStats.svg?branch=master)](https://travis-ci.org/aligusnet/FsStats)
 
 Basic statistics with some probability library.
 
@@ -20,6 +20,13 @@ dotnet add package FsStats
 
 ```(bash)
 dotnet test src/Test/Test.fsproj
+```
+
+### Build and publishing the package
+
+```(bash)
+dotnet pack  # prints path to nupkg required by the next command
+dotnet nuget push <path/to/nupkg> -k <API-KEY> -s https://api.nuget.org/v3/index.json
 ```
 
 ## Licensing
