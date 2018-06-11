@@ -6,18 +6,31 @@ open FsUnit.Xunit
 open FsStats.Special
 
 
-[<Fact>]
-let ``Gauss error function`` () = 
+[<Theory>]
+[<InlineData(0.0, 0.0)>]
+[<InlineData(0.1, 0.1124629)>]
+[<InlineData(0.5, 0.5204999)>]
+[<InlineData(1.0, 0.8427008)>]
+[<InlineData(3.0, 0.9999779)>]
+[<InlineData(-0.1, -0.1124629)>]
+[<InlineData(-0.5, -0.5204999)>]
+[<InlineData(-1.0, -0.8427008)>]
+[<InlineData(-3.0, -0.9999779)>]
+let ``Gauss error function`` (x, expected) = 
     let eps = 1e-5
-    erf 0.0 |> should (equalWithin eps) 0.0
-    erf 0.1 |> should (equalWithin eps) 0.1124629
-    erf 0.5 |> should (equalWithin eps) 0.5204999
-    erf 1.0 |> should (equalWithin eps) 0.8427008
-    erf 3.0 |> should (equalWithin eps) 0.9999779
-    erf -0.1 |> should (equalWithin eps) -0.1124629
-    erf -0.5 |> should (equalWithin eps) -0.5204999
-    erf -1.0 |> should (equalWithin eps) -0.8427008
-    erf -3.0 |> should (equalWithin eps) -0.9999779
+    erf x |> should (equalWithin eps) expected
+
+[<Theory>]
+[<InlineData(0.0, 0.0)>]
+[<InlineData(0.99, 1.82138637 )>]
+[<InlineData(0.5, 0.4769363)>]
+[<InlineData(0.1, 0.088856 )>]
+[<InlineData(-0.99, -1.82138637 )>]
+[<InlineData(-0.5, -0.4769363)>]
+[<InlineData(-0.1, -0.088856 )>]
+let ``Inverse error function`` (x, expected) = 
+    let eps = 0.0035
+    erfinv x |> should (equalWithin eps) expected
 
 
 [<Fact>]

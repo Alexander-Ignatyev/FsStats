@@ -20,6 +20,17 @@ module Special =
         let y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x)
         sign*y
 
+    /// Inverse Error function
+    /// Sergei Winitzki. A handy approximation for the error function and its inverse. February 6, 2008
+    /// https://1e47a410-a-62cb3a1a-s-sites.googlegroups.com/site/winitzki/sergei-winitzkis-files/erf-approx.pdf
+    let erfinv x =
+        let a = 0.147  // David W. Cantrell's suggestion
+        let b = 2.0 / (Math.PI * a)
+        let c = Math.Log (1.0 - x ** 2.0)
+        let d = b + 0.5 * c
+        let e = d ** 2.0 - c / a |> sqrt
+        let f = e - d |> sqrt
+        if x >= 0.0 then f else -f
 
     //// Lanczos approximation to the Gamma function
     let rec gammaLanczos z =
