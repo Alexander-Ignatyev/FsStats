@@ -60,3 +60,15 @@ let ``z-score tests`` (mu, sigma, x, expectedZScore) =
 let ``Probability density function`` (mu, sigma, x, pdf) =
     let nd = NormalDistribution.create mu sigma
     NormalDistribution.pdf nd x |> should (equalWithin 1e-7) pdf
+
+[<Theory>]
+[<InlineData(10.0, 2.0)>]
+[<InlineData(-5.0, 3.0)>]
+let ``Quanitile if inverse of CDF`` (mu, sigma) =
+    let nd = NormalDistribution.create mu sigma
+    let cdf = NormalDistribution.cdf nd
+    let quantile = NormalDistribution.quantile nd
+    quantile (0.5 + 0.6827*0.5) |> should (equalWithin 1e-3) (mu + sigma)
+    cdf (mu + sigma) |> should (equalWithin 1e-4) (0.5 + 0.6827*0.5)
+    quantile (0.5 - 0.6827*0.5) |> should (equalWithin 1e-3) (mu - sigma)
+    cdf (mu - sigma) |> should (equalWithin 1e-4) (0.5 - 0.6827*0.5)
