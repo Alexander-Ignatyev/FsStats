@@ -19,10 +19,9 @@ module Hypothesis =
 
         /// Perform Z-Test for the given true mean, true standard deviation, sample mean and and size of the sample.  
         let zTest trueMean trueStd sampleMean sampleSize testType =
-            let standard = NormalDistribution.create 0.0 1.0
             let standardError = trueStd / sqrt (float sampleSize)
             let z = (sampleMean - trueMean) / standardError
-            performTest (NormalDistribution.cdf standard) testType z
+            performTest StandardDistribution.cdf testType z
 
         /// Perform Student's T-Test for the given true mean, sample mean, sample standard deviation and size of the sample.
         let tTest trueMean sampleMean sampleStd sampleSize testType =

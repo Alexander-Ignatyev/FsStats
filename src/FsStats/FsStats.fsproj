@@ -3,18 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>FsStats</PackageId>
-    <Version>0.1.3</Version>
+    <Version>0.1.2</Version>
     <Authors>Alexander Ignatyev</Authors>
-    <Description>Basic statistics with some probability library. Includes common distributions (Bernoulli, Binomial, Poisson, Student's and Normal), random number generators from some of the distributions, summary statistics for a sample, Z-Test, Student's T-Test, special functions (Error, Gamma, Beta and Regularized Incomplete Beta).</Description>
-    <PackageLicenseUrl>https://github.com/aligusnet/FsStats/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/aligusnet/FsStats</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/aligusnet/FsStats.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <Description>Basic Statistics Library and Some Probability</Description>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Alexander-Ignatyev/FsStats/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Alexander-Ignatyev/FsStats</RepositoryUrl>
     <PackageTags>statistics; mathematics; fsharp; functional-programming</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="Special.fs" />
+    <Compile Include="StandardDistribution.fs" />
     <Compile Include="NormalDistribution.fs" />
     <Compile Include="BernoulliDistribution.fs" />
     <Compile Include="BinomialDistribution.fs" />
