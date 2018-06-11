@@ -1,5 +1,6 @@
 namespace FsStats
 
+open System
 open FsStats.Special
 
 module NormalDistribution =
@@ -16,6 +17,11 @@ module NormalDistribution =
 
     let stddev { Sigma = sigma } = sigma
 
+    /// Probability density function
+    let pdf { Mu = mu; Sigma = sigma } x = 
+        1.0/(2.0 * Math.PI * sigma ** 2.0 |> sqrt) * Math.Exp (-0.5 * ((x - mu)**2.0) / (sigma ** 2.0))
+
+    /// Cumulative distrinution function
     let cdf { Mu = mu; Sigma = sigma } x =
         (1.0 + erf((x - mu) / (sigma * sqrt 2.0))) * 0.5
 
@@ -29,7 +35,7 @@ module NormalDistribution =
         StandardDistribution.sample rnd m
         |> Array.map (fromStandard d)
 
-    /// z-score is the number of standard deviations from the mean a data point is.
-    /// It takes mean mu, standard deviation sigma and the data point x. 
+    /// z-score is the number of standard deviations 
+    /// from the mean a data point x is.
     let zScore { Mu = mu; Sigma = sigma } x = (x - mu) / sigma
 

@@ -50,3 +50,13 @@ let ``Mean of generated random values should be close to the distribution's mean
 let ``z-score tests`` (mu, sigma, x, expectedZScore) =
     let nd = NormalDistribution.create mu sigma
     NormalDistribution.zScore nd x |> should (equalWithin 1e-5) expectedZScore
+
+[<Theory>]
+[<InlineData(11.0, 3.0, 11.0, 0.13298076)>]
+[<InlineData(-15.0, 7.0, 5.0, 0.00096201)>]
+[<InlineData(-15.0, 7.0, -35.0, 0.00096201)>]
+[<InlineData(-15.0, 7.0, -5.0, 0.02054255)>]
+[<InlineData(12.0, 3.0, -100, 0.0)>]
+let ``Probability density function`` (mu, sigma, x, pdf) =
+    let nd = NormalDistribution.create mu sigma
+    NormalDistribution.pdf nd x |> should (equalWithin 1e-7) pdf
