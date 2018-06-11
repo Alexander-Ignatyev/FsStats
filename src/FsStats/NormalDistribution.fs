@@ -25,6 +25,10 @@ module NormalDistribution =
     let cdf { Mu = mu; Sigma = sigma } x =
         (1.0 + erf((x - mu) / (sigma * sqrt 2.0))) * 0.5
 
+    /// The quantile function of a distribution 
+    /// is the inverse of the cumulative distribution function (CDF). 
+    let quantile { Mu = mu; Sigma = sigma } p = mu + sigma * StandardDistribution.quantile p
+
     /// Generates a random number from Normal distribution
     let random d (rnd : System.Random) =
         let x = StandardDistribution.random rnd
