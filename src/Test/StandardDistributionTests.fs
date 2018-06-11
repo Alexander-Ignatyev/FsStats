@@ -42,3 +42,12 @@ let ``Mean of generated random values should be close to the distribution's mean
 [<InlineData(-10.0, 0.0)>]
 let ``Probability density function`` (x, pdf) =
     StandardDistribution.pdf x |> should (equalWithin 1e-7) pdf
+
+
+[<Theory>]
+[<InlineData(0.5, 0.0)>]
+[<InlineData(0.15865, -1.0)>]
+[<InlineData(0.84135, 1.0)>]
+let ``Quanitile if inverse of CDF`` (p, x) = 
+    StandardDistribution.quantile p |> should (equalWithin 2e-4) x
+    StandardDistribution.cdf x |> should (equalWithin 1e-4) p
