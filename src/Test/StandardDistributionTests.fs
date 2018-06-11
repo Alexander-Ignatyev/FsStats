@@ -33,3 +33,12 @@ let ``Mean of generated random values should be close to the distribution's mean
     let summary = SummaryStatistics.create (StandardDistribution.sample rnd 1001)
     summary.Mean |> should (equalWithin eps) 0.0
     summary.StdDev |> should (equalWithin eps) 1.0
+
+
+[<Theory>]
+[<InlineData(0.0, 0.39894228)>]
+[<InlineData(0.5, 0.35206533)>]
+[<InlineData(-0.5, 0.35206533)>]
+[<InlineData(-10.0, 0.0)>]
+let ``Probability density function`` (x, pdf) =
+    StandardDistribution.pdf x |> should (equalWithin 1e-7) pdf

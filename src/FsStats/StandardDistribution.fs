@@ -1,5 +1,7 @@
 namespace FsStats
 
+open System
+
 open FsStats.Special
 
 /// Standard Normal Distribution
@@ -28,6 +30,10 @@ module StandardDistribution =
 
     let stddev = 1.0
 
+    /// Probability density function
+    let pdf x = 1.0/(2.0 * Math.PI |> sqrt) * Math.Exp (-0.5 * (x**2.0))
+
+    /// Cumulative distrinution function
     let cdf x = (1.0 + erf(x / (sqrt 2.0))) * 0.5
 
     /// Generates a random number 
