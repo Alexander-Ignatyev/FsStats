@@ -36,6 +36,12 @@ module StandardDistribution =
     /// Cumulative distrinution function
     let cdf x = (1.0 + erf(x / (sqrt 2.0))) * 0.5
 
+    /// The quantile function of a distribution 
+    /// is the inverse of the cumulative distribution function (CDF). 
+    /// The quantile function of the standard normal distribution 
+    /// is called the probit function.
+    let quantile p = (sqrt 2.0) * (2.0 * p - 1.0 |> Special.erfinv)
+
     /// Generates a random number 
     /// from Standard Normal distribution
     let random (rnd : System.Random) = 
