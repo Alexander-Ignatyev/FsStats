@@ -16,7 +16,7 @@ let ``Normal distribution`` () =
     StandardDistribution.cdf -1.0 |> should (equalWithin 1e-4) (0.5 - 0.6827*0.5)
     StandardDistribution.cdf 1.0 |> should (equalWithin 1e-4) (0.5 + 0.6827*0.5)
     StandardDistribution.random rnd |> should be ofExactType<float>
-    StandardDistribution.sample rnd 20 |> should haveLength 20
+    StandardDistribution.sample rnd 19 |> should haveLength 19
 
 [<Fact>]
 let ``Standard Normal distribution confidence intervals`` () =
@@ -27,6 +27,9 @@ let ``Standard Normal distribution confidence intervals`` () =
     interval 3.0 |> should (equalWithin 1e-4) 0.9973
 
 [<Fact>]
-let ``Mean of generated random values should be close to the distribution's mean`` () =
+let ``Mean of generated random values should be close to the distribution's mean and stddev`` () =
     let rnd = new System.Random()
-    StandardDistribution.sample rnd 1000 |> Array.average |> should (equalWithin <| 0.1) 0.0
+    let eps = 0.1
+    let summary = SummaryStatistics.create (StandardDistribution.sample rnd 1001)
+    summary.Mean |> should (equalWithin eps) 0.0
+    summary.StdDev |> should (equalWithin eps) 1.0

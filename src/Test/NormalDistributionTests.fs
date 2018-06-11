@@ -35,11 +35,14 @@ let ``Normal distribution confidence intervals`` (mu, sigma) =
     interval (3.0*sigma) |> should (equalWithin 1e-4) 0.9973
 
 [<Fact>]
-let ``Mean of generated random values should be close to the distribution's mean`` () =
+let ``Mean of generated random values should be close to the distribution's mean and stddev`` () =
     let rnd = new System.Random()
     let mu, sigma = 11.0, 3.0
+    let eps = 0.1 * sigma
     let nd = NormalDistribution.create mu sigma
-    NormalDistribution.sample nd rnd 1000 |> Array.average |> should (equalWithin <| 0.1*sigma) mu
+    let summary = SummaryStatistics.create (NormalDistribution.sample nd rnd 1000)
+    summary.Mean |> should (equalWithin eps) mu
+    summary.StdDev |> should (equalWithin eps) sigma
 
 [<Theory>]
 [<InlineData(0.0, 1.0, 2.0, 2.0)>]

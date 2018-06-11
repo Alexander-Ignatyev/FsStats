@@ -28,13 +28,24 @@ module StandardDistribution =
 
     let stddev = 1.0
 
-    let cdf x =
-        (1.0 + erf(x / (sqrt 2.0))) * 0.5
+    let cdf x = (1.0 + erf(x / (sqrt 2.0))) * 0.5
 
-    /// Generates a random number from Standard Normal distribution
-    let random (rnd : System.Random) =
-        let x, _ = polarMethod rnd
-        x
+    /// Generates a random number 
+    /// from Standard Normal distribution
+    let random (rnd : System.Random) = 
+        let x, _ = polarMethod rnd in x
 
-    /// Generates a random sample of size m from Standard Normal distribution
-    let sample rnd m = Array.init m (fun _ -> random rnd)
+    /// Generates a random sample of size m 
+    /// from Standard Normal distribution
+    let sample rnd m =
+        let a = Array.zeroCreate m
+
+        let populate i _ = 
+            if i % 2 = 0 then
+                let x, y = polarMethod rnd
+                Array.set a i x
+                if i + 1 < m then 
+                    Array.set a (i + 1) y
+
+        Array.iteri populate a
+        a
