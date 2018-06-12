@@ -25,7 +25,8 @@ module Hypothesis =
 
         /// Perform Student's T-Test for the given true mean, sample mean, sample standard deviation and size of the sample.
         let tTest trueMean sampleMean sampleStd sampleSize testType =
+            let d = StudentsDistribution.create sampleSize
             let standardError = sampleStd / sqrt (sampleSize |> float)
             let tScore = (sampleMean - trueMean) / standardError
-            performTest (StudentsDistribution.cdf (sampleSize - 1)) testType tScore
+            performTest (StudentsDistribution.cdf d) testType tScore
 
