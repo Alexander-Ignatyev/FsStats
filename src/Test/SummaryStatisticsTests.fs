@@ -38,9 +38,30 @@ let ``Properties of skewness and kurtosis`` () =
 
 [<Theory>]
 [<InlineData("2.0, 0.0, 3.0, 1.0", 0.0, 0.5, 1.5, 2.5, 3.0)>]
-[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 0.0, 0.5, 2.0, 3.5, 4.0)>]
+[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 0.0, 1.0, 2.0, 3.0, 4.0)>]
 [<InlineData("2.0, 0.0", 0.0, 0.0, 1.0, 2.0, 2.0)>]
 let ``Five-number summary`` (sampleString: string, q0, q1, q2, q3, q4) = 
     let sample = sampleString.Split(',') |> Array.map float
     let stats = create sample
     fivenum stats |> should equal (q0, q1, q2, q3, q4)
+
+
+[<Theory>]
+[<InlineData("2.0, 0.0, 3.0, 1.0", 0.5, 1.5)>]
+[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 0.5, 2.0)>]
+[<InlineData("2.0, 0.0", 0.5, 1.0)>]
+[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 0.1, 0.0)>]
+[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 0.2, 0.5)>]
+let ``Percentile`` (sampleString: string, k, expected) = 
+    let sample = sampleString.Split(',') |> Array.map float
+    let stats = createAndSort sample
+    percentile stats k |> should equal expected
+
+
+[<Theory>]
+[<InlineData("0.0, 1.0", 0.5)>]
+[<InlineData("0.0, 1.0, 2.0", 1.0)>]
+let ``Meadian`` (sampleString: string, expected) =
+    let sample = sampleString.Split(',') |> Array.map float |> Array.sort
+    let stats = createWithSorted sample
+    median stats |> should (equalWithin 1e-10) expected

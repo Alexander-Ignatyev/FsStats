@@ -1,17 +1,34 @@
 namespace FsStats
 
+open System
 
 module SummaryStatistics =
 
-    type T = { Mean : float; StdDev : float; Data : float [] }
+    type T = { Mean : float; StdDev : float; Data : float []; Sorted : bool }
 
-    let create data = 
+    let private meanVariance data = 
         let mean = Array.average data
         let variance =
             let sampleLength = (Array.length data) - 1 
             let s = Array.sumBy (fun x -> (x - mean) ** 2.0) data
             LanguagePrimitives.DivideByInt s sampleLength
-        { Mean = mean; StdDev = sqrt variance; Data = data }
+        (mean, variance)
+        
+
+    /// Create a SummaryStatitics object without data sorting. 
+    /// It will require sorting for every percentile amd fivenum statistics call.
+    let create data = 
+        let mean, variance = meanVariance data
+        { Mean = mean; StdDev = sqrt variance; Data = data; Sorted = false }
+
+    /// Create a SummaryStatitics object with sorted data.
+    let createWithSorted data = 
+        let mean, variance = meanVariance data
+        { Mean = mean; StdDev = sqrt variance; Data = data; Sorted = false }
+
+
+    /// Create a SummaryStatitics object and sort data.
+    let createAndSort = createWithSorted << Array.sort
 
     let mean { Mean = mu } =
         mu
@@ -33,21 +50,31 @@ module SummaryStatistics =
         let m = Array.sumBy (fun x -> (x - mean) ** 4.0) data
         (LanguagePrimitives.DivideByInt m n) / (sd ** 4.0)
  
+    let private percentileForSorted data k =
+        let p = k * (Array.length data |> float)
+        if abs (Math.Floor(p) - p) < Double.Epsilon
+        then
+            let i = int p
+            (data.[i-1] + data.[i]) * 0.5
+        else
+            let i = Math.Ceiling p |> int
+            data.[i-1]
+
+    /// Calculates k-th percentile
+    let percentile { Data = data; Sorted = sorted } k =
+        if k <= 0.0 || k >= 1.0 then invalidArg "k" "k must be between 0 and 1"
+        if sorted then percentileForSorted data k
+        else percentileForSorted (Array.sort data) k
+
+    let median sd = percentile sd 0.5
+
     /// Five-number summary
     /// (sample minimum, first quartile, median, third quartile, sample maximum)
-    let fivenum {  Data = data } =
-        let median (d : float []) start finish =
-            let n = finish - start
-            if n % 2 = 0
-            then (d.[start + n / 2 - 1] + d.[start + n / 2]) * 0.5
-            else d.[start + n / 2]
+    let rec fivenum { Data = data; Sorted = sorted } =
+        let d = if sorted then data else Array.sort data
+        let prc = percentileForSorted d
+        (d.[0], prc 0.25, prc 0.5, prc 0.75, d.[Array.length d - 1])
 
-        let sorted = Array.sort data
-        let n = Array.length sorted
-        let q1_value = median sorted 0 (n/2)
-        let median_value = median sorted 0 n
-        let q3_value = median sorted (n - n/2) n
-        (sorted.[0], q1_value, median_value, q3_value, sorted.[n - 1])
 
     /// Sample Correlation
     let correlation x y =
