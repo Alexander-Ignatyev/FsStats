@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\FsStats\FsStats.fsproj" />
+    <ProjectReference Include="..\FsStats\FsStats.fsproj" />
   </ItemGroup>
 
 
