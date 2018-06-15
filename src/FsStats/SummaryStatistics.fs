@@ -70,10 +70,17 @@ module SummaryStatistics =
 
     /// Five-number summary
     /// (sample minimum, first quartile, median, third quartile, sample maximum)
-    let rec fivenum { Data = data; Sorted = sorted } =
+    let fivenum { Data = data; Sorted = sorted } =
         let d = if sorted then data else Array.sort data
         let prc = percentileForSorted d
         (d.[0], prc 0.25, prc 0.5, prc 0.75, d.[Array.length d - 1])
+
+    
+    /// Interquartile range
+    let iqr { Data = data; Sorted = sorted } =
+        let d = if sorted then data else Array.sort data
+        let prc = percentileForSorted d
+        prc 0.75 - prc 0.25
 
 
     /// Sample Correlation
