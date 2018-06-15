@@ -65,3 +65,13 @@ let ``Meadian`` (sampleString: string, expected) =
     let sample = sampleString.Split(',') |> Array.map float |> Array.sort
     let stats = createWithSorted sample
     median stats |> should (equalWithin 1e-10) expected
+
+
+[<Theory>]
+[<InlineData("2.0, 0.0, 3.0, 1.0", 2.0)>]
+[<InlineData("2.0, 0.0, 4.0, 3.0, 1.0", 2.0)>]
+[<InlineData("2.0, 0.0", 2.0)>]
+let ``Interquartile range`` (sampleString: string, expected) = 
+    let sample = sampleString.Split(',') |> Array.map float
+    let stats = create sample
+    iqr stats |> should (equalWithin 1e-10) expected
