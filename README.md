@@ -1,6 +1,6 @@
 # FsStats
 
-[![Build Status](https://travis-ci.org/aligusnet/FsStats.svg?branch=master)](https://travis-ci.org/aligusnet/FsStats)
+[![Build status](https://ci.appveyor.com/api/projects/status/wx57w432dl0vnta4/branch/master?svg=true)](https://ci.appveyor.com/project/aligusnet/fsstats/branch/master)
 
 Basic statistics with some probability library.
 
