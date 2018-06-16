@@ -20,6 +20,7 @@ module StudentsDistribution =
         elif df > 1.0 then Double.PositiveInfinity
         else Double.NaN
 
+    let stddev = sqrt << variance
 
     /// Probability density function
     let pdf { Nu = nu } x =

@@ -15,9 +15,12 @@ let ``Student's t-distribution`` () =
     StudentsDistribution.median d |> should (equalWithin 1e-5) 0.0
     StudentsDistribution.mode d |> should (equalWithin 1e-5) 0.0
     StudentsDistribution.variance d |> should (equalWithin 1e-5) 1.25
+    StudentsDistribution.stddev d |> should (equalWithin 1e-5) (sqrt 1.25)
 
     StudentsDistribution.variance (StudentsDistribution.create 2) |> should be NaN
     StudentsDistribution.variance (StudentsDistribution.create 3) |> should equal System.Double.PositiveInfinity
+    StudentsDistribution.stddev (StudentsDistribution.create 2) |> should be NaN
+    StudentsDistribution.stddev (StudentsDistribution.create 3) |> should equal System.Double.PositiveInfinity
 
 
 [<Theory>]
