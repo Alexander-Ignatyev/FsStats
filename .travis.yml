@@ -3,4 +3,5 @@ mono: none
 dotnet: 2.1.300
 script:
  - dotnet restore
- - dotnet test src/Test/Test.fsproj 
+ - dotnet build src/AWSLambda/AWSLambda.fsproj
+ - dotnet test src/Test/Test.fsproj
