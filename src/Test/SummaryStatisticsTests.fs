@@ -17,7 +17,8 @@ let data = [|13.7858911526618; 9.55203558961586; 8.73590083796644; 14.6446895575
 let ``Summary Statistics`` () = 
     let stats = create data
     mean stats |> should (equalWithin 1e-5)  9.98706
-    stdDev stats |> should (equalWithin 1e-5) 2.02096
+    stddev stats |> should (equalWithin 1e-5) 2.02096
+    variance stats |> should (equalWithin 1e-5) 4.08428
     skewness stats |> should (equalWithin 1e-5) 0.23142
     kurtosis stats |> should (equalWithin 1e-5)  2.74207
 

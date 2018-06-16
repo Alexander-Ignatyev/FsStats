@@ -33,8 +33,13 @@ module SummaryStatistics =
     let mean { Mean = mu } =
         mu
 
-    let stdDev { StdDev = std } =
+    let stddev { StdDev = std } =
         std
+
+    [<Obsolete("stdDev is depricated. Please use stddev instead")>]
+    let stdDev = stddev
+
+    let variance d = (stddev d) ** 2.0
 
     /// Calculates sample skewness,
     /// a measure of the asymmetry
