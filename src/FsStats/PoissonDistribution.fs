@@ -17,11 +17,10 @@ module PoissonDistribution =
     let stddev { T.Mu = mu } = sqrt mu
 
     let private factorial x = 
-        let rec util(value, acc) = 
-            match value with
-            |0 | 1 -> acc
-            | _    -> util(value - 1, acc * value)
-        util(x,1)
+        let rec util value acc =
+            if value <= 1.0 then acc
+            else util (value - 1.0) (acc * value)
+        util x 1.0
 
     let private knuthsSample mu (rnd : System.Random) =
         let l = exp (-mu)
@@ -33,11 +32,11 @@ module PoissonDistribution =
         util(0, 1.0)
     
     /// Probability Mass Function.
-    let pmf { T.Mu = mu } k = (mu ** float k) * exp (-mu) / (float (factorial k))
+    let pmf { T.Mu = mu } k = ((mu ** float k) * exp (-mu)) / (float k |> factorial)
 
     /// Cumulative Distribution Function.
     let cdf { T.Mu = mu } k = 
-        let s = Array.sumBy (fun i -> (mu ** float i) / (float (factorial i))) [|0 .. k|]
+        let s = Array.sumBy (fun i -> (mu ** float i) / (float i |> factorial)) [|0 .. k|]
         exp (-mu) * s
 
     /// Generates a random number from Poisson distribution
