@@ -14,6 +14,9 @@ module NormalDistribution =
 
     type Response = {
         Params : NormalDistribution.T
+        Mean : float
+        StdDev : float
+        Variance : float
         Curve : (float[] * float[]) option
         Pdf : float option
         Cdf : float option
@@ -31,10 +34,11 @@ module NormalDistribution =
 
     let rnd = System.Random()
 
-    let handle (r: Request) =
-        let d = NormalDistribution.create r.Params.Mu r.Params.Sigma
-        {
+    let handle (r: Request) = {
             Params = r.Params
+            Mean = NormalDistribution.mean r.Params
+            StdDev = NormalDistribution.stddev r.Params
+            Variance = NormalDistribution.variance r.Params
             Curve = Option.map (handleCurve r.Params) r.Curve
             Pdf = Option.map (NormalDistribution.pdf r.Params) r.Pdf
             Cdf = Option.map (NormalDistribution.cdf r.Params) r.Cdf
