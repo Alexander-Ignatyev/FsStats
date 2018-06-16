@@ -7,6 +7,7 @@ module Processor =
         Poisson : PoissonDistribution.Request option
         Normal : NormalDistribution.Request option
         Summary : SummaryStatistics.Request option
+        Hypothesis : Hypothesis.Request option
     }
 
     type Response = {
@@ -15,6 +16,7 @@ module Processor =
         Poisson : PoissonDistribution.Response option
         Normal : NormalDistribution.Response option
         Summary : SummaryStatistics.Response option
+        Hypothesis : Hypothesis.Response option
     }
     
     let handle (r: Request) = {
@@ -23,4 +25,5 @@ module Processor =
         Poisson = Option.map PoissonDistribution.handle r.Poisson
         Normal = Option.map NormalDistribution.handle r.Normal
         Summary = Option.map SummaryStatistics.handle r.Summary
+        Hypothesis = Option.map Hypothesis.handle r.Hypothesis
     }
