@@ -9,6 +9,7 @@ module NormalDistribution =
         Pdf : float option
         Cdf : float option
         Quantile : float option
+        Sample : int option
     }
 
     type Response = {
@@ -17,6 +18,7 @@ module NormalDistribution =
         Pdf : float option
         Cdf : float option
         Quantile : float option
+        Sample : float[] option
     }
 
     let handleCurve (d : NormalDistribution.T) n =
@@ -27,6 +29,8 @@ module NormalDistribution =
         (x, y)
         
 
+    let rnd = System.Random()
+
     let handle (r: Request) =
         let d = NormalDistribution.create r.Params.Mu r.Params.Sigma
         {
@@ -35,4 +39,5 @@ module NormalDistribution =
             Pdf = Option.map (NormalDistribution.pdf r.Params) r.Pdf
             Cdf = Option.map (NormalDistribution.cdf r.Params) r.Cdf
             Quantile = Option.map (NormalDistribution.quantile r.Params) r.Quantile
+            Sample = Option.map (NormalDistribution.sample r.Params rnd) r.Sample
         }

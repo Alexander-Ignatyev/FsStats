@@ -50,7 +50,8 @@ Deploy function to AWS Lambda
     "Curve": 20,
     "Pdf": 10,
     "Cdf": 11,
-    "Quantile": 0.63055859
+    "Quantile": 0.63055859,
+    "Sample": 10
   }
 }
 ```
