@@ -2,13 +2,16 @@
 
 module Processor =
     type Request = {
-        Normal : NormalDistribution.Request
+        Bernoulli : BernoulliDistribution.Request option
+        Normal : NormalDistribution.Request option
     }
 
     type Response = {
-        Normal : NormalDistribution.Response
+        Bernoulli : BernoulliDistribution.Response option
+        Normal : NormalDistribution.Response option
     }
     
     let handle (r: Request) = {
-        Normal = NormalDistribution.handle r.Normal
+        Bernoulli = Option.map BernoulliDistribution.handle r.Bernoulli
+        Normal = Option.map NormalDistribution.handle r.Normal
     }
