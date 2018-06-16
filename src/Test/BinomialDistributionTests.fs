@@ -35,7 +35,9 @@ let ``Binomial Distribution of 10 tosses of fair coin`` () =
     BinomialDistribution.variance bd |> should (equalWithin 1e-10) 2.5
     BinomialDistribution.stddev bd |> should (equalWithin 1e-10) 1.58113883008
     BinomialDistribution.pmf bd 3 |> should (equalWithin 1e-10) 0.1171875
+    BinomialDistribution.pmf bd 15 |> should (equalWithin 1e-10) 0.0
     BinomialDistribution.cdf bd 10 |> should (equalWithin 1e-10) 1.0
+    BinomialDistribution.cdf bd 15 |> should (equalWithin 1e-10) 1.0
     BinomialDistribution.cdf bd 5 |> should (equalWithin 1e-10) 0.623046875
     BinomialDistribution.random bd rnd |> should be (lessThan 11)
     BinomialDistribution.sample bd rnd 20 |> should haveLength 20
@@ -48,8 +50,10 @@ let ``Binomial Distribution of 7 tosses of loaded coin`` () =
     BinomialDistribution.variance bd |> should (equalWithin 1e-10) 1.47
     BinomialDistribution.stddev bd |> should (equalWithin 1e-10) 1.2124355653
     BinomialDistribution.pmf bd 3 |> should (equalWithin 1e-10) 0.2268945
+    BinomialDistribution.pmf bd 10 |> should (equalWithin 1e-10) 0.0
     BinomialDistribution.cdf bd 7 |> should (equalWithin 1e-10) 1.0
     BinomialDistribution.cdf bd 3 |> should (equalWithin 1e-10) 0.873964
+    BinomialDistribution.cdf bd 10 |> should (equalWithin 1e-10) 1.0
     BinomialDistribution.random bd rnd |> should be (lessThan 8)
     BinomialDistribution.sample bd rnd 20 |> should haveLength 20
 

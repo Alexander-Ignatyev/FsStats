@@ -17,11 +17,13 @@ module BinomialDistribution =
     let stddev = sqrt << variance
 
     /// Binomial Coefficient n choose k
-    let coefficient n k = 
-        let k = max k (n-k)
-        let a = Array.fold (*) 1 [|k+1 .. n|]
-        let b = Array.fold (*) 1 [|1 .. n-k|]
-        in a / b
+    let coefficient n k =
+        if k > n then 0
+        else
+            let k = max k (n-k)
+            let a = Array.fold (*) 1 [|k+1 .. n|]
+            let b = Array.fold (*) 1 [|1 .. n-k|]
+            in a / b
     
     /// Probability Mass Function.
     /// The probability of getting exactly k successes in n trials
