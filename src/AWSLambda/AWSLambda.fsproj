@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="PoissonDistribution.fs" />
     <Compile Include="BinomialDistribution.fs" />
     <Compile Include="BernoulliDistribution.fs" />
     <Compile Include="JsonSerializer.fs" />
