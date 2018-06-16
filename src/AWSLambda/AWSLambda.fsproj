@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="SummaryStatistics.fs" />
     <Compile Include="StudentsDistribution.fs" />
     <Compile Include="PoissonDistribution.fs" />
     <Compile Include="BinomialDistribution.fs" />
