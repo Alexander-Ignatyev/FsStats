@@ -16,6 +16,7 @@ module BinomialDistribution =
         Mean : float
         StdDev : float
         Variance : float
+        IsNormalApproximationApplicable : bool
         Curve : (int[] * float[]) option
         Pmf : float option
         Cdf : float option
@@ -34,6 +35,7 @@ module BinomialDistribution =
             Mean = BinomialDistribution.mean r.Params
             StdDev = BinomialDistribution.stddev r.Params
             Variance = BinomialDistribution.variance r.Params
+            IsNormalApproximationApplicable = BinomialDistribution.isNormalApproximationApplicable r.Params
             Curve = Option.map (handleCurve r.Params) r.Curve
             Pmf = Option.map (BinomialDistribution.pmf r.Params) r.Pmf
             Cdf = Option.map (BinomialDistribution.cdf r.Params) r.Cdf

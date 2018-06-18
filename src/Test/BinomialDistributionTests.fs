@@ -62,3 +62,13 @@ let ``Probabily of winning in at least 4 out of 10 ten Roulette games`` () =
     let bd = BinomialDistribution.create 10 (18.0/38.0)
     Array.sumBy (BinomialDistribution.pmf bd) [|4..10|]
     |> should (equalWithin 1e-7) 0.7815551
+
+
+[<Theory>]
+[<InlineData(40, 0.3, true)>]
+[<InlineData(20, 0.3, false)>]
+[<InlineData(20, 0.7, false)>]
+[<InlineData(20, 0.5, true)>]
+let ``Is Normal Approximation Applicable`` (n, p, expected) =
+    let d = BinomialDistribution.create n p
+    BinomialDistribution.isNormalApproximationApplicable d |> should equal expected

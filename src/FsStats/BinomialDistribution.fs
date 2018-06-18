@@ -2,19 +2,27 @@ namespace FsStats
 
 
 module BinomialDistribution =
-    type T = { NuberOfTrials : int; P : float }
+    type T = { NumberOfTrials : int; P : float }
 
 
     /// Create Binomial Distribution.
     /// Takes number of trial and probability of success
-    let create n p = { NuberOfTrials = n; P = p }
+    let create n p = { NumberOfTrials = n; P = p }
 
 
-    let mean { NuberOfTrials = n; P = p } = p * float n
+    let mean { NumberOfTrials = n; P = p } = p * float n
 
-    let variance { NuberOfTrials = n; P = p } = p * (1.0 - p) * float n
+    let variance { NumberOfTrials = n; P = p } = p * (1.0 - p) * float n
 
     let stddev = sqrt << variance
+
+
+    /// Normal Approximation to the Binomial
+    /// If true the binomial distribution might be approximated
+    /// by normal distribution with mean = BinomialDistribution.mean
+    /// and stddev = BinomialDistrinution.stddev
+    let isNormalApproximationApplicable { NumberOfTrials = n; P = p } =
+       p * float n >= 10.0 && (1.0 - p) * float n >= 10.0
 
     /// Binomial Coefficient n choose k
     let coefficient n k =
@@ -28,7 +36,7 @@ module BinomialDistribution =
     /// Probability Mass Function.
     /// The probability of getting exactly k successes in n trials
     /// with probability of every single success equals p.
-    let pmf { NuberOfTrials = n; P = p } k =
+    let pmf { NumberOfTrials = n; P = p } k =
         let numOutcomes = coefficient n k |> float
         let probSuccesses = p ** float k
         let probFailures = (1.0 - p) ** float (n - k)
@@ -38,7 +46,7 @@ module BinomialDistribution =
     let cdf d k = Array.sumBy (pmf d) [|0 .. k|]
 
     /// Generates a random number from Binomial distribution
-    let random { NuberOfTrials = n; P = p } (rnd : System.Random) = 
+    let random { NumberOfTrials = n; P = p } (rnd : System.Random) = 
         let bd = BernoulliDistribution.create p
         BernoulliDistribution.sample bd rnd n |> Array.sum
 
