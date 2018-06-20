@@ -37,14 +37,6 @@
     <Compile Include="StudentsDistribution.fs" />
     <Compile Include="SummaryStatistics.fs" />
     <Compile Include="Hypothesis.fs" />
-
-    <Compile Include="OOD/Distribution.fs" />
-    <Compile Include="OOD/DiscreteDistribution.fs" />
-    <Compile Include="OOD/ContinuousDistribution.fs" />
-    <Compile Include="OOD/Bernoulli.fs" />
-    <Compile Include="OOD/Normal.fs" />
-    <Compile Include="OOD/Binomial.fs" />
-    <Compile Include="OOD/Poisson.fs" />
   </ItemGroup>
 
 </Project>

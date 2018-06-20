@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Bernoulli.fs" />
+    <Compile Include="Binomial.fs" />
+    <Compile Include="ContinuousDistribution.fs" />
+    <Compile Include="DiscreteDistribution.fs" />
+    <Compile Include="Distribution.fs" />
+    <Compile Include="Normal.fs" />
+    <Compile Include="Poisson.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsStats" Version="0.2.1" />
+  </ItemGroup>
+
+</Project>

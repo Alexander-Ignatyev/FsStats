@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../FsStats/FsStats.fsproj">
@@ -8,10 +8,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OOD/BernoulliTests.fs" />
-    <Compile Include="OOD/BinomialTests.fs" />
-    <Compile Include="OOD/PoissonTests.fs" />
-    <Compile Include="OOD/NormalTests.fs" />
     <Compile Include="BernoulliDistributionTests.fs" />
     <Compile Include="BinomialDistributionTests.fs" />
     <Compile Include="NormalDistributionTests.fs" />
