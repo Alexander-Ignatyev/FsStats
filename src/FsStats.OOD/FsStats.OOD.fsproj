@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Alexander Ignatyev</Authors>
+    <Company />
+    <Description>FsStats.OOD is an incomplete object-oriented interface for FsStats https://www.nuget.org/packages/FsStats</Description>
+    <PackageLicenseUrl>https://github.com/aligusnet/FsStats/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/aligusnet/FsStats</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aligusnet/FsStats.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>statistics; mathematics; fsharp</PackageTags>
+    <Copyright>(c) 2018 Alexander Ignatyev</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
