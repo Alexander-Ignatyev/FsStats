@@ -52,7 +52,7 @@ let ``One-sample T-Test for Sample Should Work`` (trueMean, sampleString: string
     let (lowerTail, upperTail, twoTail) = getZTestExpectedResults lowerP
     let summary = SummaryStatistics.create sample
     let sampleMean = SummaryStatistics.mean summary
-    let sampleStd = SummaryStatistics.stdDev summary
+    let sampleStd = SummaryStatistics.stddev summary
     let sampleSize = Array.length sample
     OneSample.tTest trueMean sampleMean sampleStd sampleSize LowerTailed |> lowerTail
     OneSample.tTest trueMean sampleMean sampleStd sampleSize UpperTailed |> upperTail
