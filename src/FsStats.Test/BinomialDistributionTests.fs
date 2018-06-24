@@ -7,15 +7,15 @@ open FsStats
 
 [<Fact>]
 let ``10 choose 3 equals 120`` () =
-    BinomialDistribution.coefficient 10 3 |> should equal 120
+    BinomialDistribution.coefficient 10.0 3.0 |> should equal 120.0
 
 [<Fact>]
 let ``4 choose 2 equals 6`` () =
-    BinomialDistribution.coefficient 4 2 |> should equal 6
+    BinomialDistribution.coefficient 4.0 2.0 |> should equal 6.0
 
 [<Fact>]
 let ``8 choose 5 equals 70`` () =
-    BinomialDistribution.coefficient 8 4 |> should equal 70
+    BinomialDistribution.coefficient 8.0 4.0 |> should equal 70.0
 
 [<Fact>]
 let ``Probability of getting 3 heads after 6 tosses of loaded coin`` () =

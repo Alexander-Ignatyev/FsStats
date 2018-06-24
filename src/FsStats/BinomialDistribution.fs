@@ -26,20 +26,21 @@ module BinomialDistribution =
 
     /// Binomial Coefficient n choose k
     let coefficient n k =
-        if k > n then 0
+        if k > n then 0.0
         else
             let k = max k (n-k)
-            let a = Array.fold (*) 1 [|k+1 .. n|]
-            let b = Array.fold (*) 1 [|1 .. n-k|]
+            let a = Array.fold (*) 1.0 [|k + 1.0 .. n|]
+            let b = Array.fold (*) 1.0 [|1.0 .. n - k|]
             in a / b
     
     /// Probability Mass Function.
     /// The probability of getting exactly k successes in n trials
     /// with probability of every single success equals p.
     let pmf { NumberOfTrials = n; P = p } k =
-        let numOutcomes = coefficient n k |> float
-        let probSuccesses = p ** float k
-        let probFailures = (1.0 - p) ** float (n - k)
+        let n_, k_ = float n, float k
+        let numOutcomes = coefficient n_ k_
+        let probSuccesses = p ** k_
+        let probFailures = (1.0 - p) ** (n_ - k_)
         in numOutcomes * probSuccesses * probFailures
     
     /// Cumulative Distribution Function.
