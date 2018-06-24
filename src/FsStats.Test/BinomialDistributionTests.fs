@@ -5,17 +5,14 @@ open FsUnit.Xunit
 
 open FsStats
 
-[<Fact>]
-let ``10 choose 3 equals 120`` () =
-    BinomialDistribution.coefficient 10.0 3.0 |> should equal 120.0
-
-[<Fact>]
-let ``4 choose 2 equals 6`` () =
-    BinomialDistribution.coefficient 4.0 2.0 |> should equal 6.0
-
-[<Fact>]
-let ``8 choose 5 equals 70`` () =
-    BinomialDistribution.coefficient 8.0 4.0 |> should equal 70.0
+[<Theory>]
+[<InlineData(10.0, 3.0, 120.0)>]
+[<InlineData(4.0, 2.0, 6.0)>]
+[<InlineData(8.0, 5.0, 56.0)>]
+[<InlineData(8.0, 0.0, 1.0)>]
+[<InlineData(8.0, 8.0, 1.0)>]
+let ``n choose k``(n, k , expected) =
+    BinomialDistribution.coefficient n k |> should (equalWithin 1e-15) expected
 
 [<Fact>]
 let ``Probability of getting 3 heads after 6 tosses of loaded coin`` () =
