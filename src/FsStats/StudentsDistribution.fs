@@ -5,7 +5,7 @@ open System
 /// Student's t-distribution
 module StudentsDistribution =
 
-    type T = private { Nu : float }
+    type T = { Nu : float }
 
     let create sampleSize = 
         if sampleSize > 1 then { Nu = float (sampleSize - 1); } 
