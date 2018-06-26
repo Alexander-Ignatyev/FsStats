@@ -1,11 +1,12 @@
 ﻿namespace FsStats.AWSLambda
 
+open System
 open FsStats
 
 module BinomialDistribution =
     type Request = {
         Params : BinomialDistribution.T
-        Curve : int option
+        Curve : bool
         Pmf : int option
         Cdf : int option
         Sample : int option
@@ -23,12 +24,17 @@ module BinomialDistribution =
         Sample : int[] option
     }
 
-    let handleCurve (d : BinomialDistribution.T) n =
-        let x = [| for x in 0 .. n -> x |]
+    let handleCurve (d : BinomialDistribution.T) =
+        let mu = BinomialDistribution.mean d
+        let s = BinomialDistribution.stddev d
+        let start = max 0 (Convert.ToInt32(Math.Floor (mu - 4.0 * s)))
+        let finish = Convert.ToInt32(Math.Ceiling (mu + 4.0 * s + 1.0))
+        let x = [| start .. finish |]
         let y = Array.map (BinomialDistribution.pmf d) x
-        (x, y)
+        Some (x, y)
 
-    let rnd = System.Random()
+
+    let rnd = Random()
 
     let handle (r: Request) = {
             Params = r.Params
@@ -36,7 +42,7 @@ module BinomialDistribution =
             StdDev = BinomialDistribution.stddev r.Params
             Variance = BinomialDistribution.variance r.Params
             IsNormalApproximationApplicable = BinomialDistribution.isNormalApproximationApplicable r.Params
-            Curve = Option.map (handleCurve r.Params) r.Curve
+            Curve = if r.Curve then handleCurve r.Params else None
             Pmf = Option.map (BinomialDistribution.pmf r.Params) r.Pmf
             Cdf = Option.map (BinomialDistribution.cdf r.Params) r.Cdf
             Sample = Option.map (BinomialDistribution.sample r.Params rnd) r.Sample

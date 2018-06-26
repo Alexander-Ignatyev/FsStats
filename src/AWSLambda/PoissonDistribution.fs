@@ -23,15 +23,13 @@ module PoissonDistribution =
         Sample : int[] option
     }
 
-    let handleCurve (d : PoissonDistribution.T) b =
-        if b then
-            let s = PoissonDistribution.stddev d
-            let start = Convert.ToInt32(Math.Floor (d.Mu - 4.0 * s))
-            let finish = Convert.ToInt32(Math.Ceiling (d.Mu + 4.0 * s + 1.0))
-            let x = [| start .. finish |]
-            let y = Array.map (PoissonDistribution.pmf d) x
-            Some (x, y)
-        else None
+    let handleCurve (d : PoissonDistribution.T) =
+        let s = PoissonDistribution.stddev d
+        let start = Convert.ToInt32(Math.Floor (d.Mu - 4.0 * s))
+        let finish = Convert.ToInt32(Math.Ceiling (d.Mu + 4.0 * s + 1.0))
+        let x = [| start .. finish |]
+        let y = Array.map (PoissonDistribution.pmf d) x
+        Some (x, y)
         
 
     let rnd = Random()
@@ -41,7 +39,7 @@ module PoissonDistribution =
             Mean = PoissonDistribution.mean r.Params
             StdDev = PoissonDistribution.stddev r.Params
             Variance = PoissonDistribution.variance r.Params
-            Curve = handleCurve r.Params r.Curve
+            Curve = if r.Curve then handleCurve r.Params else None
             Pmf = Option.map (PoissonDistribution.pmf r.Params) r.Pmf
             Cdf = Option.map (PoissonDistribution.cdf r.Params) r.Cdf
             Sample = Option.map (PoissonDistribution.sample r.Params rnd) r.Sample
