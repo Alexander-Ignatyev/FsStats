@@ -21,6 +21,7 @@ let ``Summary Statistics`` () =
     variance stats |> should (equalWithin 1e-5) 4.08428
     skewness stats |> should (equalWithin 1e-5) 0.23142
     kurtosis stats |> should (equalWithin 1e-5)  2.74207
+    size stats |> should equal 30
 
 
 [<Fact>]

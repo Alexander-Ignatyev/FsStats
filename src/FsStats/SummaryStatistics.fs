@@ -88,6 +88,10 @@ module SummaryStatistics =
         prc 0.75 - prc 0.25
 
 
+    let size { Data = data } =
+        Array.length data
+
+
     /// Sample Correlation
     let correlation x y =
         let sampleLength = (Array.length x.Data) - 1

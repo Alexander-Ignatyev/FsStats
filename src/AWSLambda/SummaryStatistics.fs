@@ -23,6 +23,7 @@ module SummaryStatistics =
         Q4 : float
         Maximum : float
         IQR : float
+        Size : int
         Percentile : float option
         Correlation : float option
     }
@@ -48,6 +49,7 @@ module SummaryStatistics =
             Q4 = q4
             Maximum = maximum
             IQR = SummaryStatistics.iqr s
+            Size = SummaryStatistics.size s
             Percentile = Option.map (SummaryStatistics.percentile s) r.Percentile
             Correlation = Option.map (correlation r.Params) r.Correlation
         }
