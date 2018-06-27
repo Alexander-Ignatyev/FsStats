@@ -11,20 +11,21 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics; mathematics; fsharp</PackageTags>
     <Copyright>(c) 2018 Alexander Ignatyev</Copyright>
+    <Version>0.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Bernoulli.fs" />
-    <Compile Include="Binomial.fs" />
+    <Compile Include="Distribution.fs" />
     <Compile Include="ContinuousDistribution.fs" />
     <Compile Include="DiscreteDistribution.fs" />
-    <Compile Include="Distribution.fs" />
+    <Compile Include="Bernoulli.fs" />
+    <Compile Include="Binomial.fs" />
     <Compile Include="Normal.fs" />
     <Compile Include="Poisson.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FsStats" Version="0.2.1" />
+    <PackageReference Include="FsStats" Version="0.3.0" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@
 <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>FsStats</PackageId>
-    <Version>0.2.1</Version>
+    <Version>0.3.0</Version>
     <Authors>Alexander Ignatyev</Authors>
     <Description>Basic statistics with some probability library. Includes common distributions (Bernoulli, Binomial, Poisson, Student's and Normal), random number generators from some of the distributions, summary statistics for a sample, Z-Test, Student's T-Test, special functions (Error, Gamma, Beta and Regularized Incomplete Beta).</Description>
     <PackageLicenseUrl>https://github.com/aligusnet/FsStats/blob/master/LICENSE</PackageLicenseUrl>
@@ -11,7 +11,14 @@
     <RepositoryUrl>https://github.com/aligusnet/FsStats.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics; mathematics; fsharp; functional-programming</PackageTags>
-    <PackageReleaseNotes>0.2.1
+    <PackageReleaseNotes>0.3.0
+
+* moved FsStats.OOD to a dedicated package;
+* fixed binomial coefficient calculation for large n and k;
+* added size to SummaryStatistics.
+
+
+0.2.1
 
 * Add Interquartile range for Summary Statistics;
 * fixed binomial coefficient calculation for k &gt; n;
