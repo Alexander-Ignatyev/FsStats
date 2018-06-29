@@ -11,21 +11,48 @@ module Hypothesis =
         TestType : Hypothesis.TestType
     }
 
+    type OneSampleMeanTestResult = {
+        PValue : float
+        Score : float
+        // True of Hypothesis rejected at the given significance level
+        RejectedAtSignificanceLevel001 : bool
+        RejectedAtSignificanceLevel005 : bool
+        RejectedAtSignificanceLevel010 : bool
+    }
+
     type Request = {
         OneSampleZTest : OneSampleMeanTest option
         OneSampleTTest : OneSampleMeanTest option
     }
 
     type Response = {
-        OneSampleZTest : float option
-        OneSampleTTest : float option
+        OneSampleZTest : OneSampleMeanTestResult option
+        OneSampleTTest : OneSampleMeanTestResult option
     }
 
     let doOneSampleZTest {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
-        Hypothesis.OneSample.zTest mu std mean size testType
+        let score = Hypothesis.OneSample.score mu std mean size
+        let pValue = Hypothesis.OneSample.zTest mu std mean size testType
+        {
+            PValue = pValue
+            Score = score
+            RejectedAtSignificanceLevel001 = pValue < 0.01
+            RejectedAtSignificanceLevel005 = pValue < 0.05
+            RejectedAtSignificanceLevel010 = pValue < 0.10
+
+        }
 
     let doOneSampleTTest {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
-        Hypothesis.OneSample.tTest mu mean std size testType
+        let score = Hypothesis.OneSample.score mu std mean size
+        let pValue = Hypothesis.OneSample.tTest mu mean std size testType
+        {
+            PValue = pValue
+            Score = score
+            RejectedAtSignificanceLevel001 = pValue < 0.01
+            RejectedAtSignificanceLevel005 = pValue < 0.05
+            RejectedAtSignificanceLevel010 = pValue < 0.10
+
+        }
 
     let handle (r: Request) = {
         OneSampleZTest = Option.map doOneSampleZTest r.OneSampleZTest

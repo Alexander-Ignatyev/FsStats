@@ -17,16 +17,18 @@ module Hypothesis =
                          | TwoTailed -> 2.0 * p
             pValue
 
+        let score trueMean std sampleMean sampleSize =
+            let standardError = std / sqrt (float sampleSize)
+            (sampleMean - trueMean) / standardError
+            
         /// Perform Z-Test for the given true mean, true standard deviation, sample mean and and size of the sample.  
         let zTest trueMean trueStd sampleMean sampleSize testType =
-            let standardError = trueStd / sqrt (float sampleSize)
-            let z = (sampleMean - trueMean) / standardError
+            let z = score trueMean trueStd sampleMean sampleSize
             performTest StandardDistribution.cdf testType z
 
         /// Perform Student's T-Test for the given true mean, sample mean, sample standard deviation and size of the sample.
         let tTest trueMean sampleMean sampleStd sampleSize testType =
+            let t = score trueMean sampleStd sampleMean sampleSize
             let d = StudentsDistribution.create sampleSize
-            let standardError = sampleStd / sqrt (sampleSize |> float)
-            let tScore = (sampleMean - trueMean) / standardError
-            performTest (StudentsDistribution.cdf d) testType tScore
+            performTest (StudentsDistribution.cdf d) testType t
 
