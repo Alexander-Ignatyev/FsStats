@@ -40,7 +40,15 @@ module StandardDistribution =
     /// is the inverse of the cumulative distribution function (CDF). 
     /// The quantile function of the standard normal distribution 
     /// is called the probit function.
-    let quantile p = (sqrt 2.0) * (2.0 * p - 1.0 |> Special.erfinv)
+    let quantile p = 
+        if p <= 0.0 || p >= 1.0 then invalidArg "p" "Value must be between 0 and 1"
+        (sqrt 2.0) * (2.0 * p - 1.0 |> Special.erfinv)
+
+    /// Calculates Z-Value for the given confidence level.
+    /// Where confidence level is a value between 0 and 1.
+    let zValue level =
+        if level <= 0.0 || level >= 1.0 then invalidArg "confidence level" "Value must be between 0 and 1"
+        quantile (level * 0.5 + 0.5)
 
     /// Generates a random number 
     /// from Standard Normal distribution

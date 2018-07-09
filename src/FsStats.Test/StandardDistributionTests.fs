@@ -6,7 +6,7 @@ open FsUnit.Xunit
 open FsStats
 
 [<Fact>]
-let ``Normal distribution`` () =
+let ``Standard Normal distribution`` () =
     let rnd = new System.Random()
     StandardDistribution.mean |> should (equalWithin 1e-5) 0.0
     StandardDistribution.variance |> should (equalWithin 1e-5) 1.0
@@ -48,6 +48,33 @@ let ``Probability density function`` (x, pdf) =
 [<InlineData(0.5, 0.0)>]
 [<InlineData(0.15865, -1.0)>]
 [<InlineData(0.84135, 1.0)>]
-let ``Quanitile if inverse of CDF`` (p, x) = 
+let ``Quanitile is inverse of CDF`` (p, x) = 
     StandardDistribution.quantile p |> should (equalWithin 2e-4) x
     StandardDistribution.cdf x |> should (equalWithin 1e-4) p
+
+[<Theory>]
+[<InlineData(-0.5)>]
+[<InlineData(0.0)>]
+[<InlineData(1.0)>]
+[<InlineData(1.1)>]
+let ``Quantile calculation should fail for incorrect input`` (p) =
+    (fun() -> StandardDistribution.quantile p |> ignore) |> should throw typeof<System.ArgumentException>
+
+
+[<Theory>]
+[<InlineData(0.8, 1.28)>]
+[<InlineData(0.9, 1.64)>]
+[<InlineData(0.95, 1.96)>]
+[<InlineData(0.98, 2.33)>]
+[<InlineData(0.99, 2.58)>]
+let ``Z-Value for some confidence levels`` (level, z) =
+    StandardDistribution.zValue level |> should (equalWithin 1e-2) z
+
+
+[<Theory>]
+[<InlineData(-0.5)>]
+[<InlineData(0.0)>]
+[<InlineData(1.0)>]
+[<InlineData(1.1)>]
+let ``Z-Value calculation should fail for incorrect confidence levels`` (level) =
+    (fun() -> StandardDistribution.zValue level |> ignore) |> should throw typeof<System.ArgumentException>
