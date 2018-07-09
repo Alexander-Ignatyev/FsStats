@@ -18,3 +18,8 @@ module SampleProportion =
 
     let isNormalApproximationApplicable { Proportion = p; SampleSize = n } =
        p * float n >= 10.0 && (1.0 - p) * float n >= 10.0
+
+    let marginOfError sp confidenceLevel =
+        let se = stderr sp
+        let zValue = StandardDistribution.zValue confidenceLevel
+        zValue * se

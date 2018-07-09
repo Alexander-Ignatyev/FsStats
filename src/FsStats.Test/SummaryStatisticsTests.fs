@@ -18,6 +18,7 @@ let ``Summary Statistics`` () =
     let stats = create data
     mean stats |> should (equalWithin 1e-5)  9.98706
     stddev stats |> should (equalWithin 1e-5) 2.02096
+    stderr stats |> should (equalWithin 1e-5) 0.36898
     variance stats |> should (equalWithin 1e-5) 4.08428
     skewness stats |> should (equalWithin 1e-5) 0.23142
     kurtosis stats |> should (equalWithin 1e-5)  2.74207
@@ -77,3 +78,9 @@ let ``Interquartile range`` (sampleString: string, expected) =
     let sample = sampleString.Split(',') |> Array.map float
     let stats = create sample
     iqr stats |> should (equalWithin 1e-10) expected
+
+
+[<Fact>]
+let ``Margin of Error`` () =
+    let stats = create data
+    marginOfError stats 0.95 |> should (equalWithin 1e-5) 0.72284

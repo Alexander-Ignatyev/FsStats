@@ -35,7 +35,6 @@
 </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="SampleProportion.fs" />
     <Compile Include="Special.fs" />
     <Compile Include="StandardDistribution.fs" />
     <Compile Include="NormalDistribution.fs" />
@@ -44,6 +43,7 @@
     <Compile Include="PoissonDistribution.fs" />
     <Compile Include="StudentsDistribution.fs" />
     <Compile Include="SummaryStatistics.fs" />
+    <Compile Include="SampleProportion.fs" />
     <Compile Include="Hypothesis.fs" />
   </ItemGroup>
 

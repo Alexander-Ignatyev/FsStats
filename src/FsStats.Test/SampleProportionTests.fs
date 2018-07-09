@@ -32,3 +32,10 @@ let ``Sample Proportion mean and standard error`` (p, n, se) =
 let ``Is Normal Approximation Applicable`` (p, n, expected) =
     let sp = SampleProportion.create p n
     SampleProportion.isNormalApproximationApplicable sp |> should equal expected
+
+
+[<Theory>]
+[<InlineData(0.25, 1000, 0.95, 0.02683)>]
+let ``Margin of Error`` (p, n, level, me) =
+    let sp = SampleProportion.create p n
+    SampleProportion.marginOfError sp level |> should (equalWithin 1e-5) me

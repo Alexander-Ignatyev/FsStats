@@ -33,8 +33,13 @@ module SummaryStatistics =
     let mean { Mean = mu } =
         mu
 
+    /// Standard Deviation
     let stddev { StdDev = std } =
         std
+
+    /// Standard Error
+    let stderr { StdDev = std; Data = data } =
+        std / (Array.length data |> float |> sqrt)
 
     [<Obsolete("stdDev is depricated. Please use stddev instead")>]
     let stdDev = stddev
@@ -99,3 +104,8 @@ module SummaryStatistics =
                   |> Array.sumBy (fun (xp, yp) -> (xp - x.Mean) * (yp - y.Mean))
                   |> fun s -> LanguagePrimitives.DivideByInt s sampleLength
         cov / (x.StdDev * y.StdDev)
+
+    let marginOfError s confidenceLevel =
+        let se = stderr s
+        let zValue = StandardDistribution.zValue confidenceLevel
+        zValue * se
