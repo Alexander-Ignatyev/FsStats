@@ -22,7 +22,8 @@ module BinomialDistribution =
     /// by normal distribution with mean = BinomialDistribution.mean
     /// and stddev = BinomialDistrinution.stddev
     let isNormalApproximationApplicable { NumberOfTrials = n; P = p } =
-       p * float n >= 10.0 && (1.0 - p) * float n >= 10.0
+        let boundary = 10.0
+        p * float n >= boundary && (1.0 - p) * float n >= boundary
 
     /// Binomial Coefficient n choose k
     let coefficient n k =

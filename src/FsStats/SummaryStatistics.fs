@@ -109,3 +109,7 @@ module SummaryStatistics =
         let se = stderr s
         let zValue = StandardDistribution.zValue confidenceLevel
         zValue * se
+
+    let isNormalApproximationApplicable { Data = data } =
+        let boundary = 30
+        Array.length data >= boundary

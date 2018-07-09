@@ -17,7 +17,8 @@ module SampleProportion =
         DivideByInt (p * (1.0 - p)) n |> sqrt
 
     let isNormalApproximationApplicable { Proportion = p; SampleSize = n } =
-       p * float n >= 10.0 && (1.0 - p) * float n >= 10.0
+        let boundary = 5.0
+        p * float n >= boundary && (1.0 - p) * float n >= boundary
 
     let marginOfError sp confidenceLevel =
         let se = stderr sp

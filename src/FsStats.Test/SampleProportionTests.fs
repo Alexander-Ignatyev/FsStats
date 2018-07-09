@@ -25,10 +25,10 @@ let ``Sample Proportion mean and standard error`` (p, n, se) =
 
 
 [<Theory>]
-[<InlineData(0.3, 40, true)>]
-[<InlineData(0.3, 20, false)>]
-[<InlineData(0.7, 20, false)>]
-[<InlineData(0.5, 20, true)>]
+[<InlineData(0.3, 20, true)>]
+[<InlineData(0.3, 10, false)>]
+[<InlineData(0.7, 10, false)>]
+[<InlineData(0.5, 10, true)>]
 let ``Is Normal Approximation Applicable`` (p, n, expected) =
     let sp = SampleProportion.create p n
     SampleProportion.isNormalApproximationApplicable sp |> should equal expected
