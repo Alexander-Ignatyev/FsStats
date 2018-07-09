@@ -8,6 +8,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SampleProportionTests.fs" />
     <Compile Include="BernoulliDistributionTests.fs" />
     <Compile Include="BinomialDistributionTests.fs" />
     <Compile Include="NormalDistributionTests.fs" />

@@ -35,6 +35,7 @@
 </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="SampleProportion.fs" />
     <Compile Include="Special.fs" />
     <Compile Include="StandardDistribution.fs" />
     <Compile Include="NormalDistribution.fs" />
