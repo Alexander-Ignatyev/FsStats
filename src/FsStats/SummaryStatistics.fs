@@ -113,3 +113,10 @@ module SummaryStatistics =
     let isNormalApproximationApplicable { Data = data } =
         let boundary = 30
         Array.length data >= boundary
+
+    /// Calculates confidence interval for the population mean
+    /// with given confidence level
+    let confidenceInterval s level =
+        let moe = marginOfError s level
+        let xBar = mean s
+        (xBar - moe, xBar + moe)

@@ -82,6 +82,9 @@ let ``Interquartile range`` (sampleString: string, expected) =
 
 
 [<Fact>]
-let ``Margin of Error`` () =
+let ``Margin of Error and Confidence Interval`` () =
     let stats = create data
     marginOfError stats 0.95 |> should (equalWithin 1e-5) 0.72284
+    let l, r = confidenceInterval stats 0.95
+    l |> should (equalWithin 1e-5) 9.26422
+    r |> should (equalWithin 1e-5) 10.7099

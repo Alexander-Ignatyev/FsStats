@@ -24,3 +24,9 @@ module SampleProportion =
         let se = stderr sp
         let zValue = StandardDistribution.zValue confidenceLevel
         zValue * se
+
+    /// Calculates confidence interval for the population proportion
+    /// with given confidence level
+    let confidenceInterval sp level =
+        let moe = marginOfError sp level
+        (sp.Proportion - moe, sp.Proportion + moe)
