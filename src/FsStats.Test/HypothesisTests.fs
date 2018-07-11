@@ -215,19 +215,58 @@ module ``Two population averages`` =
     [<InlineData(7.1, 2.5, 50, 7.0, 2.3, 100, 0.59371)>]
     [<InlineData(7.1, 2.5, 100, 8.0, 2.7, 100, 0.00723)>]
     [<InlineData(8.0, 2.7, 100, 7.1, 2.5, 100, 0.99277)>]
-    let ``Z-Test should work`` (mean1, std1, size1, mean2, std2, size2, expected) =
+    let ``Z-Test should work`` (mean1, std1, size1, mean2, std2, size2, lowerP) =
+        let (lowerTail, upperTail, twoTail) = getTestExpectedResults 1e-5 lowerP
         let s1 = {Mean = mean1; StdDev = std1; Size = size1 }
         let s2 = {Mean = mean2; StdDev = std2; Size = size2 }
-        zTest s1 s2 LowerTailed |> should (equalWithin 1e-5) expected
+        zTest s1 s2 LowerTailed |> lowerTail
+        zTest s1 s2 UpperTailed |> upperTail
+        zTest s1 s2 TwoTailed |> twoTail
 
 
     [<Theory>]
-    [<InlineData(7.0, 2.3, 100, 7.1, 2.5, 50, 0.40629)>]
-    [<InlineData(7.1, 2.5, 50, 7.0, 2.3, 100, 0.59371)>]
-    [<InlineData(7.1, 2.5, 50, 7.0, 2.3, 30, 0.57228)>]
-    [<InlineData(7.1, 2.5, 100, 8.0, 2.7, 100, 0.00723)>]
-    [<InlineData(8.0, 2.7, 100, 7.1, 2.5, 100, 0.99277)>]
-    let ``t-Test should work`` (mean1, std1, size1, mean2, std2, size2, expected) =
+    [<InlineData(7.0, 2.3, 100, 7.1, 2.5, 50, 0.40679)>]
+    [<InlineData(7.1, 2.5, 50, 7.0, 2.3, 100, 0.59321)>]
+    [<InlineData(7.1, 2.5, 50, 7.0, 2.3, 30, 0.57164)>]
+    [<InlineData(7.1, 2.5, 100, 8.0, 2.7, 100, 0.00811)>]
+    [<InlineData(8.0, 2.7, 100, 7.1, 2.5, 100, 0.99189)>]
+    let ``t-Test should work`` (mean1, std1, size1, mean2, std2, size2, lowerP) =
+        let (lowerTail, upperTail, twoTail) = getTestExpectedResults 1e-5 lowerP
         let s1 = {Mean = mean1; StdDev = std1; Size = size1 }
         let s2 = {Mean = mean2; StdDev = std2; Size = size2 }
-        zTest s1 s2 LowerTailed |> should (equalWithin 1e-5) expected
+        tTest s1 s2 LowerTailed |> lowerTail
+        tTest s1 s2 UpperTailed |> upperTail
+        tTest s1 s2 TwoTailed |> twoTail
+
+
+module ``Two Population Proportions`` =
+    open TwoPopulationProportions
+
+    [<Theory>]
+    [<InlineData(0.11, 273, 0.17, 212, 0.03140)>]
+    [<InlineData(0.17, 212, 0.11, 273, 0.03140)>]
+    let ``Standard error should work`` (p1, n1, p2, n2, se) =
+        let pp1 = {Proportion = p1; Size = n1}
+        let pp2 = {Proportion = p2; Size = n2}
+        standardError pp1 pp2 |> should (equalWithin 1e-5) se
+
+    [<Theory>]
+    [<InlineData(0.11, 273, 0.17, 212, -1.91073)>]
+    [<InlineData(0.17, 212, 0.11, 273, 1.91073)>]
+    let ``Score should work`` (p1, n1, p2, n2, expected) =
+        let pp1 = {Proportion = p1; Size = n1}
+        let pp2 = {Proportion = p2; Size = n2}
+        score pp1 pp2 |> should (equalWithin 1e-5) expected
+
+
+    [<Theory>]
+    [<InlineData(0.11, 273, 0.17, 212, 0.02802)>]
+    [<InlineData(0.17, 212, 0.11, 273, 0.97198)>]
+    let ``z-Test should work`` (p1, n1, p2, n2, lowerP) =
+        let (lowerTail, upperTail, twoTail) = getTestExpectedResults 1e-5 lowerP
+        let pp1 = {Proportion = p1; Size = n1}
+        let pp2 = {Proportion = p2; Size = n2}
+        zTest pp1 pp2 LowerTailed |> lowerTail
+        zTest pp1 pp2 UpperTailed |> upperTail
+        zTest pp1 pp2 TwoTailed |> twoTail
+        
