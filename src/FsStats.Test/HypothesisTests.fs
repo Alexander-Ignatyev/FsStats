@@ -270,3 +270,14 @@ module ``Two Population Proportions`` =
         zTest pp1 pp2 UpperTailed |> upperTail
         zTest pp1 pp2 TwoTailed |> twoTail
         
+
+    [<Theory>]
+    [<InlineData(0.11, 273, 0.17, 212, 0.02870)>]
+    [<InlineData(0.17, 212, 0.11, 273, 0.97130)>]
+    let ``t-Test should work`` (p1, n1, p2, n2, lowerP) =
+        let (lowerTail, upperTail, twoTail) = getTestExpectedResults 1e-5 lowerP
+        let pp1 = {Proportion = p1; Size = n1}
+        let pp2 = {Proportion = p2; Size = n2}
+        tTest pp1 pp2 LowerTailed |> lowerTail
+        tTest pp1 pp2 UpperTailed |> upperTail
+        tTest pp1 pp2 TwoTailed |> twoTail

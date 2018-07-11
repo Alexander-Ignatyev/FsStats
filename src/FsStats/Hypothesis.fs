@@ -142,3 +142,8 @@ module Hypothesis =
         let zTest pp1 pp2 testType =
             let z = score pp1 pp2
             performTest StandardDistribution.cdf testType z
+
+        let tTest pp1 pp2 testType =
+            let t = score pp1 pp2
+            let d = StudentsDistribution.create (min pp1.Size pp2.Size)
+            performTest (StudentsDistribution.cdf d) testType t
