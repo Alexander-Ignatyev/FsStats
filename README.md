@@ -19,7 +19,7 @@ dotnet add package FsStats
 ### Build and run unit tests
 
 ```(bash)
-dotnet test src/Test/Test.fsproj
+dotnet test src/FsStats.Test/FsStats.Test.fsproj
 ```
 
 ### Build and publishing the package
