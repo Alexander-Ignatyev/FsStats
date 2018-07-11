@@ -3,6 +3,8 @@
 open FsStats
 
 module Hypothesis =
+    open Hypothesis.OnePopulationMean
+
     type OneSampleMeanTest = {
         TrueMean : float
         StdDev : float   // Population std dev for Z-Test or Sample std dev for t-Test
@@ -30,9 +32,12 @@ module Hypothesis =
         OneSampleTTest : OneSampleMeanTestResult option
     }
 
-    let doOneSampleZTest {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
-        let score = Hypothesis.OneSample.score mu std mean size
-        let pValue = Hypothesis.OneSample.zTest mu std mean size testType
+    let convert {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
+        {PopulationMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType}
+
+    let doOneSampleZTest opm =
+        let score = score opm
+        let pValue = zTest opm
         {
             PValue = pValue
             Score = score
@@ -42,9 +47,9 @@ module Hypothesis =
 
         }
 
-    let doOneSampleTTest {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
-        let score = Hypothesis.OneSample.score mu std mean size
-        let pValue = Hypothesis.OneSample.tTest mu mean std size testType
+    let doOneSampleTTest opm =
+        let score = score opm
+        let pValue = tTest opm
         {
             PValue = pValue
             Score = score
@@ -55,6 +60,6 @@ module Hypothesis =
         }
 
     let handle (r: Request) = {
-        OneSampleZTest = Option.map doOneSampleZTest r.OneSampleZTest
-        OneSampleTTest = Option.map doOneSampleTTest r.OneSampleTTest
+        OneSampleZTest = Option.map doOneSampleZTest (Option.map convert r.OneSampleZTest)
+        OneSampleTTest = Option.map doOneSampleTTest (Option.map convert r.OneSampleTTest)
     }

@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Hypothesis.fs" />
     <Compile Include="SummaryStatistics.fs" />
@@ -17,29 +16,22 @@
     <Compile Include="Processor.fs" />
     <Compile Include="Function.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="aws-lambda-tools-defaults.json" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.2.0" />
     <PackageReference Include="Fable.JsonConverter" Version="1.0.8" />
   </ItemGroup>
-
   <ItemGroup>
-    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.1.4" />
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="aws-lambda-tools-defaults.json" />
     <None Include="Readme.md" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\FsStats\FsStats.fsproj" />
   </ItemGroup>
-
-
 </Project>
