@@ -17,7 +17,12 @@
     <Compile Include="StudentsDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
     <Compile Include="SummaryStatisticsTests.fs" />
-    <Compile Include="HypothesisTests.fs" />
+    <Compile Include="Hypothesis\TestUtils.fs" />
+    <Compile Include="Hypothesis\OnePopulationMeanTests.fs" />
+    <Compile Include="Hypothesis\OnePopulationProportionTests.fs" />
+    <Compile Include="Hypothesis\TwoPopulationAveragesTests.fs" />
+    <Compile Include="Hypothesis\PairedAverageDifferenceTests.fs" />
+    <Compile Include="Hypothesis\TwoPopulationProportionsTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
