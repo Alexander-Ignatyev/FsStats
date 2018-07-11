@@ -33,11 +33,11 @@ module Hypothesis =
     }
 
     let convert {TrueMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType} =
-        {PopulationMean = mu; StdDev = std; SampleMean = mean; SampleSize = size; TestType = testType}
+        ({PopulationMean = mu; StdDev = std; SampleMean = mean; SampleSize = size}, testType)
 
-    let doOneSampleZTest opm =
+    let doOneSampleZTest (opm, testType) =
         let score = score opm
-        let pValue = zTest opm
+        let pValue = zTest opm testType
         {
             PValue = pValue
             Score = score
@@ -47,9 +47,9 @@ module Hypothesis =
 
         }
 
-    let doOneSampleTTest opm =
+    let doOneSampleTTest (opm, testType) =
         let score = score opm
-        let pValue = tTest opm
+        let pValue = tTest opm testType
         {
             PValue = pValue
             Score = score

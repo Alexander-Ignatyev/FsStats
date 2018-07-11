@@ -29,11 +29,10 @@ module ``One Population Mean`` =
             SampleMean = sampleMean
             SampleSize = sampleSize
             StdDev = trueStd
-            TestType = LowerTailed
         }
-        zTest {opm with TestType = LowerTailed} |> lowerTail
-        zTest {opm with TestType = UpperTailed} |> upperTail
-        zTest {opm with TestType = TwoTailed} |> twoTail
+        zTest opm LowerTailed |> lowerTail
+        zTest opm UpperTailed |> upperTail
+        zTest opm TwoTailed |> twoTail
 
 
     [<Theory>]
@@ -52,11 +51,10 @@ module ``One Population Mean`` =
             SampleMean = sampleMean
             SampleSize = sampleSize
             StdDev = trueStd
-            TestType = LowerTailed
         }
-        zTest {opm with TestType = LowerTailed} |> lowerTail
-        zTest {opm with TestType = UpperTailed} |> upperTail
-        zTest {opm with TestType = TwoTailed} |> twoTail
+        zTest opm LowerTailed |> lowerTail
+        zTest opm UpperTailed |> upperTail
+        zTest opm TwoTailed |> twoTail
 
 
     [<Theory>]
@@ -76,11 +74,10 @@ module ``One Population Mean`` =
             SampleMean = sampleMean
             SampleSize = sampleSize
             StdDev = sampleStd
-            TestType = LowerTailed
         }
-        tTest {opm with TestType = LowerTailed} |> lowerTail
-        tTest {opm with TestType = UpperTailed} |> upperTail
-        tTest {opm with TestType = TwoTailed} |> twoTail
+        tTest opm LowerTailed |> lowerTail
+        tTest opm UpperTailed |> upperTail
+        tTest opm TwoTailed |> twoTail
 
 
     [<Theory>]
@@ -94,7 +91,6 @@ module ``One Population Mean`` =
             SampleMean = sampleMean
             SampleSize = sampleSize
             StdDev = trueStd
-            TestType = LowerTailed
         }
         score opm |> should (equalWithin 1e-5) expected
 
@@ -165,11 +161,10 @@ module ``One Population Proportion`` =
             PopulationProportion = p0
             SampleProportion = p
             SampleSize = sampleSize
-            TestType = LowerTailed
         }
-        zTest {opp with TestType = LowerTailed} |> lowerTail
-        zTest {opp with TestType = UpperTailed} |> upperTail
-        zTest {opp with TestType = TwoTailed} |> twoTail
+        zTest opp LowerTailed |> lowerTail
+        zTest opp UpperTailed |> upperTail
+        zTest opp TwoTailed |> twoTail
 
 
     [<Theory>]
@@ -182,11 +177,10 @@ module ``One Population Proportion`` =
             PopulationProportion = p0
             SampleProportion = p
             SampleSize = sampleSize
-            TestType = LowerTailed
         }
-        tTest {opp with TestType = LowerTailed} |> lowerTail
-        tTest {opp with TestType = UpperTailed} |> upperTail
-        tTest {opp with TestType = TwoTailed} |> twoTail
+        tTest opp LowerTailed |> lowerTail
+        tTest opp UpperTailed |> upperTail
+        tTest opp TwoTailed |> twoTail
 
     [<Theory>]
     [<InlineData(0.8, 0.75, 200, -1.76777)>]
@@ -198,6 +192,5 @@ module ``One Population Proportion`` =
             PopulationProportion = p0
             SampleProportion = p
             SampleSize = sampleSize
-            TestType = LowerTailed
         }
         score opp |> should (equalWithin 1e-5) expected

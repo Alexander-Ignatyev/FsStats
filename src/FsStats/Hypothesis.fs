@@ -25,21 +25,20 @@ module Hypothesis =
             SampleMean : float
             SampleSize : int
             StdDev : float
-            TestType : TestType
         }
 
         let score { PopulationMean = trueMean; SampleMean = sampleMean; SampleSize = sampleSize; StdDev = std } = 
             let standardError = std / sqrt (float sampleSize)
             (sampleMean - trueMean) / standardError
 
-        let zTest opm =
+        let zTest opm testType =
             let z = score opm
-            performTest StandardDistribution.cdf opm.TestType z
+            performTest StandardDistribution.cdf testType z
 
-        let tTest opm =
+        let tTest opm testType =
             let t = score opm
             let d = StudentsDistribution.create opm.SampleSize
-            performTest (StudentsDistribution.cdf d) opm.TestType t
+            performTest (StudentsDistribution.cdf d) testType t
 
 
     /// One-sample tests
@@ -52,7 +51,6 @@ module Hypothesis =
                 SampleMean = sampleMean
                 SampleSize = sampleSize
                 StdDev = std
-                TestType = TwoTailed
             }
             OnePopulationMean.score opm
             
@@ -63,9 +61,8 @@ module Hypothesis =
                 SampleMean = sampleMean
                 SampleSize = sampleSize
                 StdDev = trueStd
-                TestType = testType
             }
-            OnePopulationMean.zTest opm
+            OnePopulationMean.zTest opm testType
 
         /// Perform Student's T-Test for the given true mean, sample mean, sample standard deviation and size of the sample.
         let tTest trueMean sampleMean sampleStd sampleSize testType =
@@ -74,9 +71,8 @@ module Hypothesis =
                 SampleMean = sampleMean
                 SampleSize = sampleSize
                 StdDev = sampleStd
-                TestType = testType
             }
-            OnePopulationMean.tTest opm
+            OnePopulationMean.tTest opm testType
 
 
     /// One Population Proportion Tests
@@ -85,18 +81,17 @@ module Hypothesis =
             PopulationProportion : float
             SampleProportion : float
             SampleSize : int
-            TestType : TestType
         }
 
         let score { PopulationProportion = p0; SampleProportion = p; SampleSize = n } = 
             let standardError = DivideByInt (p0 * (1.0 - p0)) n |> sqrt
             (p - p0) / standardError
 
-        let zTest opp =
+        let zTest opp testType =
             let z = score opp
-            performTest StandardDistribution.cdf opp.TestType z
+            performTest StandardDistribution.cdf testType z
 
-        let tTest opp =
+        let tTest opp testType =
             let t = score opp
             let d = StudentsDistribution.create opp.SampleSize
-            performTest (StudentsDistribution.cdf d) opp.TestType t
+            performTest (StudentsDistribution.cdf d) testType t
