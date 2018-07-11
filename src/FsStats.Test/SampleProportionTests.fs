@@ -42,3 +42,13 @@ let ``Margin of Error and Confidence Interval`` (p, n, level, me) =
     let l, r = SampleProportion.confidenceInterval sp level
     l |> should (equalWithin 1e-5) (p - me)
     r |> should (equalWithin 1e-5) (p + me)
+
+[<Fact>]
+let ``Difference of two proportions`` () =
+    let sp1 = SampleProportion.create 0.25 1000
+    let sp2 = SampleProportion.create 0.27 100
+    SampleProportion.Two.stderr sp1 sp2 |> should (equalWithin 1e-5) 0.046460
+    SampleProportion.Two.marginOfError sp1 sp2 0.95 |> should (equalWithin 1e-5) 0.09102
+    let l, r = SampleProportion.Two.confidenceInterval sp1 sp2 0.95
+    l |> should (equalWithin 1e-5) -0.11102
+    r |> should (equalWithin 1e-5) 0.07102

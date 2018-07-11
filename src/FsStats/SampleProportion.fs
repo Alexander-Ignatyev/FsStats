@@ -30,3 +30,23 @@ module SampleProportion =
     let confidenceInterval sp level =
         let moe = marginOfError sp level
         (sp.Proportion - moe, sp.Proportion + moe)
+
+    /// the difference of two proportions
+    module Two =
+        let stderr sp1 sp2 =
+            let se2 { Proportion = p; SampleSize = n } = DivideByInt (p * (1.0 - p)) n
+            sqrt (se2 sp1 + se2 sp2)
+
+        /// Calculate Margin of Error for the difference of two proportions
+        /// with given confidence level
+        let marginOfError sp1 sp2 level =
+            let se =  stderr sp1 sp2
+            let zValue = StandardDistribution.zValue level
+            zValue * se
+
+        /// Calculate Confidence Level for the difference of two proportions
+        /// with given confidence level
+        let confidenceInterval s1 s2 level =
+            let moe = marginOfError s1 s2 level
+            let diff = mean s1 - mean s2
+            (diff - moe, diff + moe)
