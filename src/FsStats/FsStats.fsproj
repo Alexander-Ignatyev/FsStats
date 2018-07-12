@@ -44,6 +44,7 @@
     <Compile Include="StudentsDistribution.fs" />
     <Compile Include="SummaryStatistics.fs" />
     <Compile Include="SampleProportion.fs" />
+    <Compile Include="BivariateAnalysis.fs" />
     <Compile Include="Hypothesis\Test.fs" />
     <Compile Include="Hypothesis\OnePopulationMean.fs" />
     <Compile Include="Hypothesis\OnePopulationProportion.fs" />

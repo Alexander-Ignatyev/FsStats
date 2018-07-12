@@ -98,6 +98,7 @@ module SummaryStatistics =
 
 
     /// Sample Correlation
+    [<Obsolete("SummaryStatistics.correlation is depricated. Please use BivariateAnalysis.correlation instead")>]
     let correlation x y =
         let sampleLength = (Array.length x.Data) - 1
         let cov = Array.zip x.Data y.Data
@@ -140,4 +141,3 @@ module SummaryStatistics =
             let moe = marginOfError s1 s2 level
             let diff = mean s1 - mean s2
             (diff - moe, diff + moe)
-

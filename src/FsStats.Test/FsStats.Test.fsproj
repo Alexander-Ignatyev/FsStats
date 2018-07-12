@@ -17,6 +17,7 @@
     <Compile Include="StudentsDistributionTests.fs" />
     <Compile Include="SpecialTests.fs" />
     <Compile Include="SummaryStatisticsTests.fs" />
+    <Compile Include="BivariateAnalysisTests.fs" />
     <Compile Include="Hypothesis\TestUtils.fs" />
     <Compile Include="Hypothesis\OnePopulationMeanTests.fs" />
     <Compile Include="Hypothesis\OnePopulationProportionTests.fs" />
@@ -32,4 +33,5 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

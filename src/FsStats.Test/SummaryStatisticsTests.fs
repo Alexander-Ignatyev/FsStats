@@ -1,5 +1,7 @@
 module ``Sample Statistics tests``
 
+#nowarn "44"
+
 open Xunit
 open FsUnit.Xunit
 
