@@ -3,7 +3,7 @@
 <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>FsStats</PackageId>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Authors>Alexander Ignatyev</Authors>
     <Description>Basic statistics with some probability library. Includes common distributions (Bernoulli, Binomial, Poisson, Student's and Normal), random number generators from some of the distributions, summary statistics for a sample, Z-Test, Student's T-Test, special functions (Error, Gamma, Beta and Regularized Incomplete Beta).</Description>
     <PackageLicenseUrl>https://github.com/aligusnet/FsStats/blob/master/LICENSE</PackageLicenseUrl>
@@ -11,7 +11,19 @@
     <RepositoryUrl>https://github.com/aligusnet/FsStats.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics; mathematics; fsharp; functional-programming</PackageTags>
-    <PackageReleaseNotes>0.3.0
+    <PackageReleaseNotes>0.4.0
+
+* Added SampleProportion module;
+* added StandardDistribution.zValue function;
+* added functions to calculate Margin of Error for SummaryStatistics and SampleProportion;
+* added functions to calculate Confidence Intervals for SummaryStatistics and SampleProportion;
+* added one-sample and two-samples tests for SampleProportion;
+* added two-samples tests for SummaryStatistics;
+* added BivariateAnalysis module to calculate linear regression for 2 variables;
+* depricated SummaryStatistics.correlation function in favour of BivariateAnalysis.correlation.
+
+
+0.3.0
 
 * moved FsStats.OOD to a dedicated package;
 * fixed binomial coefficient calculation for large n and k;
@@ -25,6 +37,7 @@
 * Poisson Distribution fix: calculate factorial using float;
 * added stddev for Student's t-distribution;
 * added isNormalApproximationApplicable for Binomial Distribution.
+
 
 0.2.0
 
