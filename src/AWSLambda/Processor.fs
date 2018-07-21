@@ -9,6 +9,7 @@ module Processor =
         Students : StudentsDistribution.Request option
         Summary : SummaryStatistics.Request option
         Hypothesis : Hypothesis.Request option
+        OnePopulationMeanTest : OnePopulationMeanTest.Request option
     }
 
     type Response = {
@@ -19,6 +20,7 @@ module Processor =
         Students : StudentsDistribution.Response option
         Summary : SummaryStatistics.Response option
         Hypothesis : Hypothesis.Response option
+        OnePopulationMeanTest : OnePopulationMeanTest.Response option
     }
     
     let handle (r: Request) = {
@@ -29,4 +31,5 @@ module Processor =
         Students = Option.map StudentsDistribution.handle r.Students
         Summary = Option.map SummaryStatistics.handle r.Summary
         Hypothesis = Option.map Hypothesis.handle r.Hypothesis
+        OnePopulationMeanTest = Option.map OnePopulationMeanTest.handle r.OnePopulationMeanTest
     }

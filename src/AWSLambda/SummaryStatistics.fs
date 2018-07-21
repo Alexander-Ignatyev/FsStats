@@ -29,9 +29,9 @@ module SummaryStatistics =
     }
 
     let correlation lhs rhs = 
-        let l = SummaryStatistics.create lhs
-        let r = SummaryStatistics.create rhs
-        SummaryStatistics.correlation l r
+        let l = BivariateAnalysis.create lhs
+        let r = BivariateAnalysis.create rhs
+        BivariateAnalysis.correlation l r
 
     let handle (r: Request) =
         let s = SummaryStatistics.createAndSort r.Params
