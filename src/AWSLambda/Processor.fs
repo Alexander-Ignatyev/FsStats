@@ -8,7 +8,6 @@ module Processor =
         Normal : NormalDistribution.Request option
         Students : StudentsDistribution.Request option
         Summary : SummaryStatistics.Request option
-        Hypothesis : Hypothesis.Request option
         OnePopulationMeanTest : OnePopulationMeanTest.Request option
     }
 
@@ -19,7 +18,6 @@ module Processor =
         Normal : NormalDistribution.Response option
         Students : StudentsDistribution.Response option
         Summary : SummaryStatistics.Response option
-        Hypothesis : Hypothesis.Response option
         OnePopulationMeanTest : OnePopulationMeanTest.Response option
     }
     
@@ -30,6 +28,5 @@ module Processor =
         Normal = Option.map NormalDistribution.handle r.Normal
         Students = Option.map StudentsDistribution.handle r.Students
         Summary = Option.map SummaryStatistics.handle r.Summary
-        Hypothesis = Option.map Hypothesis.handle r.Hypothesis
         OnePopulationMeanTest = Option.map OnePopulationMeanTest.handle r.OnePopulationMeanTest
     }
